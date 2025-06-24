@@ -1,4 +1,3 @@
-import random
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -99,9 +98,30 @@ def DPLloyd(data, steps, starting_centroids, eps, r=1.0):
         centroids = new_centroids
     return centroids
 
+def check_accuracy(centroids, data, clusters):
+    """
+    Check the accuracy of the clustering by comparing the centroids with the actual data points.
+
+    Parameters:
+    - centroids: The centroids obtained from clustering.
+    - data: The original data points.
+    - clusters: The cluster assignments for each data point.
+
+    Returns:
+    - A float representing the accuracy of the clustering.
+    """
+    correct = 0
+    distances = np.linalg.norm(data[:, np.newaxis] - centroids, axis=2)
+    found_clusters = np.argmin(distances, axis=1)
+    for i in range(len(data)):
+        if found_clusters[i] == clusters[i]: # TODO this doesn't handle the case where clusters are permuted by chance, which is overwhelmingly likely with >2 clusters.
+            correct += 1
+    return correct / len(data)
+
 if __name__ == "__main__":
     # Example usage
-    data = normalize(np.random.rand(500, 2)+np.array([generate_laplace_noise(4.0, 2.0, 2) for i in range(250)] + [generate_laplace_noise(-1.0, 1.0, 2) for i in range(250)]), (-1, 1))  # 100 points in 2D
+    data = normalize(np.random.rand(500, 2)+np.array([generate_laplace_noise(4.0, 2.0, 2) for i in range(250)] + [generate_laplace_noise(-1.0, 1.0, 2) for i in range(250)]), (-1, 1))
+    classes = [0 for _ in range(250)] + [1 for _ in range(250)]
     starting_centroids = generate_starting_centroids(2, 2)
     centroids = starting_centroids.copy()
     DP_centroids = starting_centroids.copy()
@@ -110,8 +130,11 @@ if __name__ == "__main__":
     for i in range(steps):
         DP_centroids = DPLloyd(data, steps=1, starting_centroids=DP_centroids, eps=eps/steps)
         centroids = k_means(data, steps=1, starting_centroids=centroids)
-        plt.scatter(data[:, 0], data[:, 1], c='blue', label='Data Points')
+        plt.scatter(data[:250, 0], data[:250, 1], c='blue', label='Data Points (class 1)')
+        plt.scatter(data[250:, 0], data[250:, 1], c='blue', label='Data Points (class 2)')
         plt.scatter(DP_centroids[:, 0], DP_centroids[:, 1], c='red', label='DPLLoyd Centroids', marker="X")
         plt.scatter(centroids[:, 0], centroids[:, 1], c='green', label='Non-private Centroids', marker="X")
         plt.legend()
         plt.show()
+        print(f"Centroids accuracy: {check_accuracy(centroids, data, classes)}")
+        print(f"DP centroids accuracy: {check_accuracy(DP_centroids, data, classes)}")
