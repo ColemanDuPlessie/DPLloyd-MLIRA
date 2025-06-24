@@ -1,0 +1,36 @@
+import numpy as np
+import pandas as pd
+
+rice_file_path = "Rice_Cammeo_Osmancik.xlsx"
+
+def get_rice_dataset():
+    """
+    Load the rice dataset from an Excel file and return it as a numpy array.
+    """
+    df = pd.read_excel(rice_file_path, sheet_name="Rice")
+    df = df.reset_index(drop=True)
+    return df.to_numpy()
+
+def split_dataset(data, train_size=0.5):
+    """
+    Split a dataset into training and testing sets.
+    
+    Parameters:
+    - data: The rice dataset as a numpy array.
+    - train_size: Proportion of the dataset to include in the training set.
+    
+    Returns:
+    - train_data: Training set as a numpy array.
+    - test_data: Testing set as a numpy array.
+    """
+    np.random.shuffle(data)
+    split_index = int(len(data) * train_size)
+    train_data = data[:split_index]
+    test_data = data[split_index:]
+    return train_data, test_data
+
+if __name__ == "__main__":
+    # Example usage
+    rice_data = get_rice_dataset()
+    print("Rice dataset loaded with shape:", rice_data.shape)
+    print("First few rows of the dataset:\n", rice_data[:5])
