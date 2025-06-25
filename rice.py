@@ -9,7 +9,7 @@ def get_rice_dataset():
     """
     df = pd.read_excel(rice_file_path, sheet_name="Rice")
     df = df.reset_index(drop=True)
-    return df.to_numpy()
+    return np.concatenate((df.to_numpy()[:, :-1].astype(np.float64), np.expand_dims(df.to_numpy()[:, -1], axis=1)), axis=1)
 
 def split_dataset(data, train_size=0.5):
     """

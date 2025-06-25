@@ -68,7 +68,7 @@ def k_means(data, steps, starting_centroids):
         centroids = new_centroids
     return centroids
 
-def DPLloyd(data, steps, starting_centroids, eps, r=1.0):
+def DPLloyd(data, steps, starting_centroids, eps):
     """
     
     Parameters:
@@ -76,7 +76,6 @@ def DPLloyd(data, steps, starting_centroids, eps, r=1.0):
     - steps: Number of iterations.
     - starting_centroids: Initial centroids for clustering.
     - eps: Privacy budget for differential privacy.
-    - r: Scaling factor for 
     
     Returns:
     - A list of centroids
@@ -116,6 +115,8 @@ def check_accuracy(centroids, data, clusters):
     for i in range(len(data)):
         if found_clusters[i] == clusters[i]: # TODO this doesn't handle the case where clusters are permuted by chance, which is overwhelmingly likely with >2 clusters.
             correct += 1
+    if len(centroids) == 2 and correct < len(data) / 2:
+        correct = len(data) - correct  # If we have two clusters, we can easily handle the case where they are swapped
     return correct / len(data)
 
 if __name__ == "__main__":
