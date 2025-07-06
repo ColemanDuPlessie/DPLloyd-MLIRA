@@ -13,24 +13,6 @@ def get_rice_dataset():
     df = df.reset_index(drop=True)
     return np.concatenate((df.to_numpy()[:, :-1].astype(np.float64), np.expand_dims(df.to_numpy()[:, -1], axis=1)), axis=1)
 
-def split_dataset(data, train_size=0.5):
-    """
-    Split a dataset into training and testing sets.
-    
-    Parameters:
-    - data: The rice dataset as a numpy array.
-    - train_size: Proportion of the dataset to include in the training set.
-    
-    Returns:
-    - train_data: Training set as a numpy array.
-    - test_data: Testing set as a numpy array.
-    """
-    np.random.shuffle(data)
-    split_index = int(len(data) * train_size)
-    train_data = data[:split_index]
-    test_data = data[split_index:]
-    return train_data, test_data
-
 if __name__ == "__main__":
     # Example usage
     rice_data = get_rice_dataset()

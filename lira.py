@@ -1,7 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from tqdm import tqdm
-from rice import get_rice_dataset, split_dataset, NUM_SAMPLES
+from datasets.rice import get_rice_dataset, NUM_SAMPLES
+from datasets.datasets import split_dataset
 from kmeans import normalize, generate_starting_centroids, k_means, DPLloyd, check_accuracy
 
 def lira_attack(train_data, test_data, centroids, label=""):
