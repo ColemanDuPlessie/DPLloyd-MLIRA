@@ -72,7 +72,7 @@ if __name__ == "__main__":
         centroids = generate_starting_centroids(2, train.shape[1])
 
         nonprivate_centroids = centroids.copy()
-        for step in range(10):
+        for step in range(5):
             nonprivate_centroids = k_means(train, steps=1, starting_centroids=nonprivate_centroids)
             if PRINT_DURING_LOOP:
                 print(f"Train accuracy of non-private k-means after step {step}: {check_accuracy(nonprivate_centroids, train, train_keys)}")
