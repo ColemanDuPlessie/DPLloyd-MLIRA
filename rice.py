@@ -3,6 +3,8 @@ import pandas as pd
 
 rice_file_path = "Rice_Cammeo_Osmancik.xlsx"
 
+NUM_SAMPLES = 3810
+
 def get_rice_dataset():
     """
     Load the rice dataset from an Excel file and return it as a numpy array.
