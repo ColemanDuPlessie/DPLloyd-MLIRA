@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-rice_file_path = "Rice_Cammeo_Osmancik.xlsx"
+rice_file_path = "datasets/Rice_Cammeo_Osmancik.xlsx"
 
 NUM_SAMPLES = 3810
 
