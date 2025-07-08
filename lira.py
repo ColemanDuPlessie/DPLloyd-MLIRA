@@ -69,11 +69,11 @@ if __name__ == "__main__":
     for i in tqdm(range(5000)):
         if DATASET_TO_USE == "iris":
             TRAIN_SET_SIZE = 0.5
-            train, train_keys, test, test_keys = split_iris_dataset(data, train_size=2/3)
+            train, train_keys, test, test_keys = split_iris_dataset(data, train_size=TRAIN_SET_SIZE)
             centroids = generate_starting_centroids(3, train.shape[1])
         else:
             TRAIN_SET_SIZE = 0.5
-            train, train_keys, test, test_keys = split_rice_dataset(data, train_size=0.5)
+            train, train_keys, test, test_keys = split_rice_dataset(data, train_size=TRAIN_SET_SIZE)
             centroids = generate_starting_centroids(2, train.shape[1])
 
         nonprivate_centroids = centroids.copy()
