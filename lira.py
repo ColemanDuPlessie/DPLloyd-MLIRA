@@ -1,14 +1,14 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from tqdm import tqdm
-from datasets.rice import get_rice_dataset, NUM_SAMPLES
-from datasets.datasets import split_dataset
-from kmeans import normalize, generate_starting_centroids, k_means, DPLloyd, check_accuracy
+from datasets.rice import get_rice_dataset, split_rice_dataset, NUM_RICE_SAMPLES
+from datasets.iris import get_iris_dataset, split_iris_dataset, NUM_IRIS_SAMPLES
+from kmeans import generate_starting_centroids, k_means, DPLloyd, check_accuracy
 
 def lira_attack(train_data, test_data, centroids, label=""):
     """
     returns two 1D binary arrays whose elements are True if the relevant sample is classified as being in the training set
-    and False if it is classified as being in the test set, according to the LIRA attack.
+    and False if it is classified as being in the test set, according to the LIRA.
     """
     distances = np.linalg.norm(train_data[:, np.newaxis] - centroids, axis=2)
     train_advantages = np.array([1-min(x) for x in distances]) # High numbers indicate that the sample is close to a centroid, which means it is likely in the training set.
@@ -19,7 +19,7 @@ def lira_attack(train_data, test_data, centroids, label=""):
     sorted_test_advantages = np.sort(test_advantages)
 
     max_diff = 0
-    max_diff_point = 0
+    max_diff_point = min(sorted_train_advantages[0], sorted_test_advantages[0])-0.001  # Start with a threshold that classifies everything as being in the training set.
     max_diff_train_pointer = 0
     max_diff_test_pointer = 0
     train_pointer = 0
@@ -50,9 +50,14 @@ def lira_attack(train_data, test_data, centroids, label=""):
     return (train_detected, test_detected, max_diff, max_diff_train_pointer, max_diff_test_pointer)
 
 if __name__ == "__main__":
-    data = get_rice_dataset()
-    
-    print("Rice dataset loaded successfully!")
+    DATASET_TO_USE = "iris" # Either "rice" or "iris"
+
+    if DATASET_TO_USE == "iris":
+        data = get_iris_dataset()
+        print("Iris dataset loaded successfully!")
+    else:
+        data = get_rice_dataset()
+        print("Rice dataset loaded successfully!")
 
     nonprivate_success_rates = []
     private_success_rates = []
@@ -62,15 +67,14 @@ if __name__ == "__main__":
     PRINT_DURING_LOOP = False
 
     for i in tqdm(range(5000)):
-        train, test = split_dataset(data, train_size=0.5)
-
-        train_keys = np.array([0 if k == "Cammeo" else 1 for k in train[:, -1]])
-        train = normalize(train[:, :-1], (-1, 1)).astype(np.float64)
-        test_keys = np.array([0 if k == "Cammeo" else 1 for k in test[:, -1]])
-        test = normalize(test[:, :-1], (-1, 1)).astype(np.float64)
-
-
-        centroids = generate_starting_centroids(2, train.shape[1])
+        if DATASET_TO_USE == "iris":
+            TRAIN_SET_SIZE = 0.5
+            train, train_keys, test, test_keys = split_iris_dataset(data, train_size=2/3)
+            centroids = generate_starting_centroids(3, train.shape[1])
+        else:
+            TRAIN_SET_SIZE = 0.5
+            train, train_keys, test, test_keys = split_rice_dataset(data, train_size=0.5)
+            centroids = generate_starting_centroids(2, train.shape[1])
 
         nonprivate_centroids = centroids.copy()
         for step in range(5):
@@ -80,7 +84,7 @@ if __name__ == "__main__":
                 print(f"Test accuracy of non-private k-means after step {step}: {check_accuracy(nonprivate_centroids, train, train_keys)}")
         nonprivate_train_accs.append(check_accuracy(nonprivate_centroids, train, train_keys))
 
-        eps = 0.1
+        eps = 1.0
         DP_steps = 5
         eps_per_step = eps / DP_steps
         private_centroids = centroids.copy()
@@ -94,22 +98,22 @@ if __name__ == "__main__":
         nonprivate_attack_guesses = lira_attack(train, test, nonprivate_centroids) # , label="nonprivate")
         nonprivate_attack_train_acc = np.mean(nonprivate_attack_guesses[0])
         nonprivate_attack_test_acc = np.mean(nonprivate_attack_guesses[1])
-        nonprivate_attack_success_rate = (1+nonprivate_attack_train_acc-nonprivate_attack_test_acc)/2 # This relies on the facts that our dataset contains only two classes and that the train and test sets are equal in size.
+        nonprivate_attack_success_rate = (TRAIN_SET_SIZE*nonprivate_attack_train_acc) + (1-TRAIN_SET_SIZE)*(1-nonprivate_attack_test_acc)
         nonprivate_success_rates.append(nonprivate_attack_success_rate)
 
         private_attack_guesses = lira_attack(train, test, private_centroids) # , label="private")
         private_attack_train_acc = np.mean(private_attack_guesses[0])
         private_attack_test_acc = np.mean(private_attack_guesses[1])
-        private_attack_success_rate = (1+private_attack_train_acc-private_attack_test_acc)/2 # This relies on the facts that our dataset contains only two classes and that the train and test sets are equal in size.
+        private_attack_success_rate = (TRAIN_SET_SIZE*private_attack_train_acc) + (1-TRAIN_SET_SIZE)*(1-private_attack_test_acc)
         private_success_rates.append(private_attack_success_rate)
     
         if PRINT_DURING_LOOP:
-            print(f"Accuracies of LIRA attack on...\n Non-private K-means model: {nonprivate_attack_success_rate}\n Private K-means model: {private_attack_success_rate}")
+            print(f"Accuracies of LIRA on...\n Non-private K-means model: {nonprivate_attack_success_rate}\n Private K-means model: {private_attack_success_rate}")
 
         # plt.legend()
         # plt.show()
 
-    print(f"Average success rate of LIRA attack on non-private K-means model: {np.mean(nonprivate_success_rates)}")
-    print(f"Average success rate of LIRA attack on private K-means model: {np.mean(private_success_rates)}")
+    print(f"Average success rate of LIRA on non-private K-means model: {np.mean(nonprivate_success_rates)}")
+    print(f"Average success rate of LIRA on private K-means model: {np.mean(private_success_rates)}")
     print(f"Average train accuracy of non-private K-means model: {np.mean(nonprivate_train_accs)}")
     print(f"Average train accuracy of private K-means model: {np.mean(private_train_accs)}")

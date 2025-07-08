@@ -97,26 +97,53 @@ def DPLloyd(data, steps, starting_centroids, eps):
         centroids = new_centroids
     return centroids
 
-def check_accuracy(centroids, data, clusters):
+def infer_labels(centroids, data, keys):
+    """
+    Infer labels for the centroids based on the data points.
+
+    Parameters:
+    - centroids: The centroids obtained from clustering.
+    - data: The original data points.
+    - keys: The actual labels for the data points.
+
+    Returns:
+    - A list of inferred labels for the centroids.
+    """
+    distances = np.linalg.norm(data[:, np.newaxis] - centroids, axis=2)
+    found_clusters = np.argmin(distances, axis=1)
+    
+    inferred_labels = []
+    for i in range(len(centroids)):
+        cluster_keys = keys[found_clusters == i]
+        if len(cluster_keys) > 0:
+            inferred_labels.append(np.bincount(cluster_keys).argmax())
+        else:
+            inferred_labels.append(-1)  # No points assigned to this centroid
+    return inferred_labels
+
+def check_accuracy(raw_centroids, data, clusters):
     """
     Check the accuracy of the clustering by comparing the centroids with the actual data points.
 
     Parameters:
-    - centroids: The centroids obtained from clustering.
+    - raw_centroids: The centroids obtained from clustering.
     - data: The original data points.
     - clusters: The cluster assignments for each data point.
 
     Returns:
     - A float representing the accuracy of the clustering.
     """
+    centroids = raw_centroids[infer_labels(raw_centroids, data, clusters)]
+
     correct = 0
     distances = np.linalg.norm(data[:, np.newaxis] - centroids, axis=2)
     found_clusters = np.argmin(distances, axis=1)
     for i in range(len(data)):
-        if found_clusters[i] == clusters[i]: # TODO this doesn't handle the case where clusters are permuted by chance, which is overwhelmingly likely with >2 clusters.
+        if found_clusters[i] == clusters[i]:
             correct += 1
     if len(centroids) == 2 and correct < len(data) / 2:
         correct = len(data) - correct  # If we have two clusters, we can easily handle the case where they are swapped
+        print("Swapped clusters detected. This should never happen, due to the infer_labels function, so if you're seeing this, something has gone wrong.")
     return correct / len(data)
 
 if __name__ == "__main__":
