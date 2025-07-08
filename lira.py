@@ -5,17 +5,19 @@ from datasets.rice import get_rice_dataset, split_rice_dataset, NUM_RICE_SAMPLES
 from datasets.iris import get_iris_dataset, split_iris_dataset, NUM_IRIS_SAMPLES
 from kmeans import generate_starting_centroids, k_means, DPLloyd, check_accuracy
 
-def lira_attack(train_data, test_data, centroids, label=""):
+def get_kmeans_confidences(data, centroids):
+    """
+    Returns a 1D array of a confidence metric denoting the confidence that each sample in the data belongs to the training set.
+    """
+    distances = np.linalg.norm(data[:, np.newaxis] - centroids, axis=2)
+    return np.array([1-min(x) for x in distances])  # High numbers indicate that the sample is close to a centroid, which means it is likely in the training set.
+
+def lira_attack(train_advantages, test_advantages, label=""):
     """
     returns two 1D binary arrays whose elements are True if the relevant sample is classified as being in the training set
     and False if it is classified as being in the test set, according to the LIRA.
     """
-    distances = np.linalg.norm(train_data[:, np.newaxis] - centroids, axis=2)
-    train_advantages = np.array([1-min(x) for x in distances]) # High numbers indicate that the sample is close to a centroid, which means it is likely in the training set.
     sorted_train_advantages = np.sort(train_advantages)
-
-    distances = np.linalg.norm(test_data[:, np.newaxis] - centroids, axis=2)
-    test_advantages = np.array([1-min(x) for x in distances])
     sorted_test_advantages = np.sort(test_advantages)
 
     max_diff = 0
@@ -95,13 +97,13 @@ if __name__ == "__main__":
                 print(f"Test accuracy of private k-means with epsilon={eps} after step {step}: {check_accuracy(private_centroids, train, train_keys)}")
         private_train_accs.append(check_accuracy(private_centroids, train, train_keys))
         
-        nonprivate_attack_guesses = lira_attack(train, test, nonprivate_centroids) # , label="nonprivate")
+        nonprivate_attack_guesses = lira_attack(get_kmeans_confidences(train, nonprivate_centroids), get_kmeans_confidences(test, nonprivate_centroids)) # , label="nonprivate")
         nonprivate_attack_train_acc = np.mean(nonprivate_attack_guesses[0])
         nonprivate_attack_test_acc = np.mean(nonprivate_attack_guesses[1])
         nonprivate_attack_success_rate = (TRAIN_SET_SIZE*nonprivate_attack_train_acc) + (1-TRAIN_SET_SIZE)*(1-nonprivate_attack_test_acc)
         nonprivate_success_rates.append(nonprivate_attack_success_rate)
 
-        private_attack_guesses = lira_attack(train, test, private_centroids) # , label="private")
+        private_attack_guesses = lira_attack(get_kmeans_confidences(train, private_centroids), get_kmeans_confidences(test, private_centroids)) # , label="private")
         private_attack_train_acc = np.mean(private_attack_guesses[0])
         private_attack_test_acc = np.mean(private_attack_guesses[1])
         private_attack_success_rate = (TRAIN_SET_SIZE*private_attack_train_acc) + (1-TRAIN_SET_SIZE)*(1-private_attack_test_acc)
