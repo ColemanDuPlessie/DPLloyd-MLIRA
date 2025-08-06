@@ -89,7 +89,7 @@ def train_epoch(model, train_loader, optimizer, epoch, privacy_engine):
                 optimizer.step()
 
                 if (i+1) % 200 == 0:
-                    epsilon = privacy_engine.get_epsilon() if privacy_engine is not None else 0.0
+                    epsilon = privacy_engine.get_epsilon(1e-5) if privacy_engine is not None else 0.0
                     print(
                         f"\tTrain Epoch: {epoch} \t"
                         f"Loss: {np.mean(losses):.6f} "
