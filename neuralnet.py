@@ -23,7 +23,7 @@ CIFAR10_MEAN = (0.4914, 0.4822, 0.4465)
 CIFAR10_STD_DEV = (0.2023, 0.1994, 0.2010)
 DATA_ROOT = '../cifar10'
 
-def get_CIFAR10():
+def get_CIFAR10(train_set_size=1.0, test_set_is_leftover_train=False):
 
     transform = transforms.Compose([
         transforms.ToTensor(),
@@ -33,25 +33,34 @@ def get_CIFAR10():
     train_dataset = CIFAR10(
         root=DATA_ROOT, train=True, download=True, transform=transform)
 
+    if train_set_size < 1.0:
+        train_indices = np.random.choice(
+            len(train_dataset), int(len(train_dataset) * train_set_size), replace=False)
+        train_dataset = torch.utils.data.Subset(train_dataset, train_indices)
     train_loader = torch.utils.data.DataLoader(
         train_dataset,
         batch_size=BATCH_SIZE,
     )
 
-    test_dataset = CIFAR10(
-        root=DATA_ROOT, train=False, download=True, transform=transform)
+    if test_set_is_leftover_train:
+        test_indices = [i for i in range(len(train_dataset)) if i not in train_indices]
+        test_dataset = torch.utils.data.Subset(train_dataset, test_indices)
+    else:
+        test_dataset = CIFAR10(
+            root=DATA_ROOT, train=False, download=True, transform=transform)
 
     test_loader = torch.utils.data.DataLoader(
         test_dataset,
         batch_size=BATCH_SIZE,
         shuffle=False,
     )
+
     return train_loader, test_loader
 
 def accuracy(preds, labels):
     return (preds == labels).mean()
 
-def train_epoch(model, train_loader, optimizer, epoch, privacy_engine):
+def train_epoch(model, train_loader, optimizer, epoch, privacy_engine, debug=False):
     model.train()
     criterion = nn.CrossEntropyLoss()
 
@@ -67,7 +76,7 @@ def train_epoch(model, train_loader, optimizer, epoch, privacy_engine):
             optimizer=optimizer
         ) as memory_safe_data_loader:
 
-            for i, (images, target) in tqdm(enumerate(memory_safe_data_loader)):   
+            for i, (images, target) in enumerate(memory_safe_data_loader):   
                 optimizer.zero_grad()
                 images = images.to(device)
                 target = target.to(device)
@@ -88,7 +97,7 @@ def train_epoch(model, train_loader, optimizer, epoch, privacy_engine):
                 loss.backward()
                 optimizer.step()
 
-                if (i+1) % 200 == 0:
+                if (i+1) % 200 == 0 and debug:
                     epsilon = privacy_engine.get_epsilon(1e-5) if privacy_engine is not None else 0.0
                     print(
                         f"\tTrain Epoch: {epoch} \t"
@@ -98,7 +107,7 @@ def train_epoch(model, train_loader, optimizer, epoch, privacy_engine):
                     )
     else:
         memory_safe_data_loader = train_loader
-        for i, (images, target) in tqdm(enumerate(memory_safe_data_loader)):   
+        for i, (images, target) in enumerate(memory_safe_data_loader):   
             optimizer.zero_grad()
             images = images.to(device)
             target = target.to(device)
@@ -119,7 +128,7 @@ def train_epoch(model, train_loader, optimizer, epoch, privacy_engine):
             loss.backward()
             optimizer.step()
 
-            if (i+1) % 200 == 0:
+            if (i+1) % 200 == 0 and debug:
                 epsilon = privacy_engine.get_epsilon() if privacy_engine is not None else 0.0
                 print(
                     f"\tTrain Epoch: {epoch} \t"
@@ -128,7 +137,7 @@ def train_epoch(model, train_loader, optimizer, epoch, privacy_engine):
                     f"(ε = {epsilon:.2f})"
                 )
 
-def train_model(train_loader, epochs=10, eps=1.0, private=True):
+def train_model(train_loader, epochs=10, eps=1.0, private=True, debug=False):
     model = models.resnet18(num_classes=10)
     model = ModuleValidator.fix(model).to(device)
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
@@ -148,7 +157,7 @@ def train_model(train_loader, epochs=10, eps=1.0, private=True):
         )
 
     for epoch in tqdm(range(epochs)):
-        train_epoch(model, train_loader, optimizer, epoch + 1, privacy_engine if private else None)
+        train_epoch(model, train_loader, optimizer, epoch + 1, privacy_engine if private else None, debug)
 
     return model
 
