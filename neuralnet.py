@@ -55,6 +55,8 @@ def get_CIFAR10(train_set_size=1.0, test_set_is_leftover_train=False):
         shuffle=False,
     )
 
+    if train_set_size < 1.0:
+        return train_loader, test_loader, train_indices
     return train_loader, test_loader
 
 def accuracy(preds, labels):
