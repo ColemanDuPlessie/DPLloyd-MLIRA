@@ -3,6 +3,8 @@ import matplotlib.pyplot as plt
 from tqdm import tqdm
 import torch
 from neuralnet import get_CIFAR10, train_model, test, device
+from sys import argv
+
 
 def get_confidences(data, model):
     """
@@ -64,9 +66,8 @@ if __name__ == "__main__":
 
     PRINT_DURING_LOOP = False
     SAVE_TRAINED_MODELS = True
-    SAVE_NUMBER_OFFSET = 4 # Used for adding additional models when some have already been trained.
-
-    for i in tqdm(range(64)):
+    SAVE_NUMBER_OFFSET = int(argv[1]) # Used for adding additional models when some have already been trained.
+    if True:
         TRAIN_SET_SIZE = 0.5
         train_loader, test_loader, train_indices = get_CIFAR10(train_set_size=TRAIN_SET_SIZE, test_set_is_leftover_train=(TRAIN_SET_SIZE < 1.0))
         
@@ -90,21 +91,10 @@ if __name__ == "__main__":
         private_success_rates.append(private_attack_success_rate)
 
         if SAVE_TRAINED_MODELS:
-            np.save(f"models/train_set_{i+SAVE_NUMBER_OFFSET}.npy", train_indices)
-            torch.save(nonprivate_model.state_dict(), f"models/nonprivate_resnet18_{i+SAVE_NUMBER_OFFSET}.pt")
-            torch.save(private_model.state_dict(), f"models/private_resnet18_{i+SAVE_NUMBER_OFFSET}.pt")
+            np.save(f"models/train_set_{SAVE_NUMBER_OFFSET}.npy", train_indices)
+            torch.save(nonprivate_model.state_dict(), f"models/nonprivate_resnet18_{SAVE_NUMBER_OFFSET}.pt")
+            torch.save(private_model.state_dict(), f"models/private_resnet18_{SAVE_NUMBER_OFFSET}.pt")
     
-        if PRINT_DURING_LOOP:
-            print(f"Accuracies of LIRA on...\n Non-private K-means model: {nonprivate_attack_success_rate}\n Private K-means model: {private_attack_success_rate}")
+        print(f"Accuracies of LIRA on...\n Non-private K-means model: {nonprivate_attack_success_rate}\n Private K-means model: {private_attack_success_rate}")
 
-        # plt.legend()
-        # plt.show()
-        del nonprivate_model
-        del private_model
-        if device == "cuda":
-            torch.cuda.empty_cache()
 
-    print(f"Average success rate of LIRA on non-private K-means model: {np.mean(nonprivate_success_rates)}")
-    print(f"Average success rate of LIRA on private K-means model: {np.mean(private_success_rates)}")
-    print(f"Average train accuracy of non-private K-means model: {np.mean(nonprivate_train_accs)}")
-    print(f"Average train accuracy of private K-means model: {np.mean(private_train_accs)}")
