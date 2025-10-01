@@ -23,28 +23,31 @@ CIFAR10_MEAN = (0.4914, 0.4822, 0.4465)
 CIFAR10_STD_DEV = (0.2023, 0.1994, 0.2010)
 DATA_ROOT = '../cifar10'
 
-def get_CIFAR10(train_set_size=1.0, test_set_is_leftover_train=False):
+def get_CIFAR10(train_set_size=1.0, test_set_is_leftover_train=False, train_datapoints=None):
 
     transform = transforms.Compose([
         transforms.ToTensor(),
         transforms.Normalize(CIFAR10_MEAN, CIFAR10_STD_DEV),
     ])
 
-    train_dataset = CIFAR10(
+    raw_dataset = CIFAR10(
         root=DATA_ROOT, train=True, download=True, transform=transform)
 
     if train_set_size < 1.0:
-        train_indices = np.random.choice(
-            len(train_dataset), int(len(train_dataset) * train_set_size), replace=False)
-        train_dataset = torch.utils.data.Subset(train_dataset, train_indices)
+        if train_datapoints is None:
+            train_indices = np.random.choice(
+            len(raw_dataset), int(len(raw_dataset) * train_set_size), replace=False)
+        else:
+            train_indices = train_datapoints
+        train_dataset = torch.utils.data.Subset(raw_dataset, train_indices)
     train_loader = torch.utils.data.DataLoader(
         train_dataset,
         batch_size=BATCH_SIZE,
     )
 
     if test_set_is_leftover_train:
-        test_indices = [i for i in range(len(train_dataset)) if i not in train_indices]
-        test_dataset = torch.utils.data.Subset(train_dataset, test_indices)
+        test_indices = [i for i in range(len(raw_dataset)) if i not in train_indices]
+        test_dataset = torch.utils.data.Subset(raw_dataset, test_indices)
     else:
         test_dataset = CIFAR10(
             root=DATA_ROOT, train=False, download=True, transform=transform)
