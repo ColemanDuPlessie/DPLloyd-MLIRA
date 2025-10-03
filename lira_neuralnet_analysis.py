@@ -53,10 +53,24 @@ def lira_attack(train_advantages, test_advantages):
         else:
             test_pointer += 1
         diff = test_pointer - train_pointer
+        print(diff)
+        print(f"Train: {train_pointer}, Test: {test_pointer}")
         if diff > max_diff:
             max_diff = diff
             try:
-                max_diff_point = (sorted_train_advantages[train_pointer] + sorted_test_advantages[test_pointer]) / 2
+                print(f"Train: {train_pointer}, Test: {test_pointer}")
+                train_point = sorted_train_advantages[train_pointer-1] if train_pointer != 0 else None
+                test_point = sorted_test_advantages[test_pointer-1] if test_pointer != 0 else None
+                if train_point is None:
+                    if test_point is None:
+                        pass # We are on the first iteration
+                    else:
+                        max_diff_point = test_point + 0.0000001
+                else:
+                    if test_point is None:
+                        max_diff_point = train_point + 0.0000001
+                    else:
+                        max_diff_point = (sorted_train_advantages[train_pointer-1] + sorted_test_advantages[test_pointer-1]) / 2
             except IndexError:
                 max_diff_point = sorted_train_advantages[train_pointer] if train_pointer < sorted_train_advantages.shape[0] else sorted_test_advantages[test_pointer]
             max_diff_train_pointer = train_pointer
@@ -89,14 +103,14 @@ if __name__ == "__main__":
 
     atk = lira_attack(dummy_train, dummy_test)
     train_acc = np.mean(atk[0])
-    test_acc = np.mean(atk[1])
-    atk_success_rate = (0.6*train_acc) + (1-0.6)*(1-test_acc)
+    test_acc = 1.0-np.mean(atk[1])
+    atk_success_rate = (0.6*train_acc) + (1-0.6)*(test_acc)
     print(f"Attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%, Threshold: {atk[2]:.4f})")
 
     simplified_atk = alt_lira_attack(dummy_train, dummy_test, 0.6)
     train_acc = np.mean(simplified_atk[0])
-    test_acc = np.mean(simplified_atk[1])
-    atk_success_rate = (0.6*train_acc) + (1-0.6)*(1-test_acc)
+    test_acc = 1.0-np.mean(simplified_atk[1])
+    atk_success_rate = (0.6*train_acc) + (1-0.6)*(test_acc)
     print(f"Attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%, Threshold: {simplified_atk[2]:.4f}))")
 
     """
