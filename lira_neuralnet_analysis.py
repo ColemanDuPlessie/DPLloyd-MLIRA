@@ -29,7 +29,7 @@ def generate_results(num_models=128, private=True):
         model = ModuleValidator.fix(model).to(device)
         model.load_state_dict(state_dict)
 
-        out = (get_confidences(train_loader, model), get_confidences(test_loader, model))
+        out = (get_confidences(train_loader, model), get_confidences(test_loader, model), train_datapoints)
         ans.append(out)
     return ans
 
@@ -37,9 +37,87 @@ def lira_attack(train_advantages, test_advantages):
     """
     returns two 2D binary arrays whose elements are True if the relevant sample is classified as being in the training set
     and False if it is classified as being in the test set, according to the LIRA.
+    """ # TODO rewrite this eventually.
+    sorted_train_advantages = np.sort(train_advantages)
+    sorted_test_advantages = np.sort(test_advantages)
+
+    max_diff = -len(train_advantages)-len(test_advantages)
+    max_diff_point = min(sorted_train_advantages[0], sorted_test_advantages[0])-0.001  # Start with a threshold that classifies everything as being in the training set.
+    max_diff_train_pointer = 0
+    max_diff_test_pointer = 0
+    train_pointer = 0
+    test_pointer = 0
+    while train_pointer < sorted_train_advantages.shape[0] and test_pointer < sorted_test_advantages.shape[0]:
+        if sorted_train_advantages[train_pointer] < sorted_test_advantages[test_pointer]:
+            train_pointer += 1
+        else:
+            test_pointer += 1
+        diff = test_pointer - train_pointer
+        if diff > max_diff:
+            max_diff = diff
+            try:
+                max_diff_point = (sorted_train_advantages[train_pointer] + sorted_test_advantages[test_pointer]) / 2
+            except IndexError:
+                max_diff_point = sorted_train_advantages[train_pointer] if train_pointer < sorted_train_advantages.shape[0] else sorted_test_advantages[test_pointer]
+            max_diff_train_pointer = train_pointer
+            max_diff_test_pointer = test_pointer
+    
+    train_detected = [x > max_diff_point for x in train_advantages]
+    test_detected = [x > max_diff_point for x in test_advantages]
+
+    return (train_detected, test_detected, max_diff_point, max_diff, max_diff_train_pointer, max_diff_test_pointer)
+
+def alt_lira_attack(train_advantages, test_advantages, train_frac=0.5):
     """
-    pass # TODO
+    returns two 2D binary arrays whose elements are True if the relevant sample is classified as being in the training set
+    and False if it is classified as being in the test set, according to the LIRA.
+    """
+    sorted_advantages = np.sort(np.concatenate((train_advantages, test_advantages), axis=0))
+
+    classified = int((1-train_frac) * sorted_advantages.shape[0])
+    print(classified)
+    threshold = (sorted_advantages[classified-1]+sorted_advantages[classified])/2 # Avoids fencepost errors: if we want the first 5 elements, we want elements 0, 1, 2, 3, 4, not element 5
+    
+    train_detected = [x > threshold for x in train_advantages]
+    test_detected = [x > threshold for x in test_advantages]
+
+    return (train_detected, test_detected, threshold)
 
 if __name__ == "__main__":
-    ans = generate_results(num_models=1, private=False)
-    print(ans[0][0].shape, ans[0][1].shape)
+    dummy_train = np.array([1.59066522, 1.32747686, 1.53802216, 1.72594547, 1.26588047, 2.3016057 ])
+    dummy_test  = np.array([2.35630631, 1.23455882, 1.53139615, 1.89570451])
+
+    atk = lira_attack(dummy_train, dummy_test)
+    train_acc = np.mean(atk[0])
+    test_acc = np.mean(atk[1])
+    atk_success_rate = (0.6*train_acc) + (1-0.6)*(1-test_acc)
+    print(f"Attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%, Threshold: {atk[2]:.4f})")
+
+    simplified_atk = alt_lira_attack(dummy_train, dummy_test, 0.6)
+    train_acc = np.mean(simplified_atk[0])
+    test_acc = np.mean(simplified_atk[1])
+    atk_success_rate = (0.6*train_acc) + (1-0.6)*(1-test_acc)
+    print(f"Attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%, Threshold: {simplified_atk[2]:.4f}))")
+
+    """
+    TRAIN_SET_SIZE = 0.5
+
+    ans = generate_results(num_models=10, private=False)
+    print("Data generated...")
+    for sample in range(50000):
+        train_idxs = [i for i in range(len(ans)) if sample in ans[i][2]]
+        test_idxs = [i for i in range(len(ans)) if sample not in ans[i][2]]
+        if len(train_idxs) < 1 or len(test_idxs) < 1:
+            continue
+        train_confidences = np.array([ans[i][0][list(ans[i][2]).index(sample)] for i in train_idxs])
+        test_confidences = np.array([ans[i][1][[j for j in range(50000) if j not in ans[i][2]].index(sample)] for i in test_idxs])
+        print(train_confidences.shape, test_confidences.shape, train_confidences, test_confidences)
+
+        atk = lira_attack(train_confidences, test_confidences)
+
+        train_acc = np.mean(atk[0])
+        test_acc = np.mean(atk[1])
+        atk_success_rate = (TRAIN_SET_SIZE*train_acc) + (1-TRAIN_SET_SIZE)*(1-test_acc)
+        print(ans[0][0].shape, ans[0][1].shape)
+        print(f"Attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
+    """
