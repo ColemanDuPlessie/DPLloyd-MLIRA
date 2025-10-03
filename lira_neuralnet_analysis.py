@@ -1,13 +1,11 @@
 import numpy as np
-import matplotlib.pyplot as plt
 from tqdm import tqdm
 import torch
 from torchvision import models
 from opacus.validators import ModuleValidator
-from neuralnet import get_CIFAR10, train_model, test, device
-from lira_neuralnet import get_confidences
+from neuralnet import get_CIFAR10, device
 
-def get_confidences(data, model): # TODO this is a kludge, we should not be overriding the import here, but I want to have the tqdm for testing purposes
+def get_confidences(data, model):
     """
     Returns a 1D array of a confidence metric denoting the confidence that each sample in the data belongs to the training set.
     """
@@ -98,6 +96,7 @@ def alt_lira_attack(train_advantages, test_advantages, train_frac=0.5):
     return (train_detected, test_detected, threshold)
 
 if __name__ == "__main__":
+    """
     dummy_train = np.array([1.59066522, 1.32747686, 1.53802216, 1.72594547, 1.26588047, 2.3016057 ])
     dummy_test  = np.array([2.35630631, 1.23455882, 1.53139615, 1.89570451])
 
@@ -112,13 +111,12 @@ if __name__ == "__main__":
     test_acc = 1.0-np.mean(simplified_atk[1])
     atk_success_rate = (0.6*train_acc) + (1-0.6)*(test_acc)
     print(f"Attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%, Threshold: {simplified_atk[2]:.4f}))")
-
     """
     TRAIN_SET_SIZE = 0.5
 
-    ans = generate_results(num_models=10, private=False)
+    ans = generate_results(num_models=3, private=False)
     print("Data generated...")
-    for sample in range(50000):
+    for sample in range(50):
         train_idxs = [i for i in range(len(ans)) if sample in ans[i][2]]
         test_idxs = [i for i in range(len(ans)) if sample not in ans[i][2]]
         if len(train_idxs) < 1 or len(test_idxs) < 1:
@@ -134,4 +132,3 @@ if __name__ == "__main__":
         atk_success_rate = (TRAIN_SET_SIZE*train_acc) + (1-TRAIN_SET_SIZE)*(1-test_acc)
         print(ans[0][0].shape, ans[0][1].shape)
         print(f"Attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
-    """
