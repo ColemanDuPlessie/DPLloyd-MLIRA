@@ -51,12 +51,9 @@ def lira_attack(train_advantages, test_advantages):
         else:
             test_pointer += 1
         diff = test_pointer - train_pointer
-        print(diff)
-        print(f"Train: {train_pointer}, Test: {test_pointer}")
         if diff > max_diff:
             max_diff = diff
             try:
-                print(f"Train: {train_pointer}, Test: {test_pointer}")
                 train_point = sorted_train_advantages[train_pointer-1] if train_pointer != 0 else None
                 test_point = sorted_test_advantages[test_pointer-1] if test_pointer != 0 else None
                 if train_point is None:
@@ -87,7 +84,6 @@ def alt_lira_attack(train_advantages, test_advantages, train_frac=0.5):
     sorted_advantages = np.sort(np.concatenate((train_advantages, test_advantages), axis=0))
 
     classified = int((1-train_frac) * sorted_advantages.shape[0])
-    print(classified)
     threshold = (sorted_advantages[classified-1]+sorted_advantages[classified])/2 # Avoids fencepost errors: if we want the first 5 elements, we want elements 0, 1, 2, 3, 4, not element 5
     
     train_detected = [x > threshold for x in train_advantages]
@@ -114,7 +110,7 @@ if __name__ == "__main__":
     """
     TRAIN_SET_SIZE = 0.5
 
-    ans = generate_results(num_models=3, private=False)
+    ans = generate_results(num_models=10, private=False)
     print("Data generated...")
     for sample in range(50):
         train_idxs = [i for i in range(len(ans)) if sample in ans[i][2]]
@@ -126,9 +122,15 @@ if __name__ == "__main__":
         print(train_confidences.shape, test_confidences.shape, train_confidences, test_confidences)
 
         atk = lira_attack(train_confidences, test_confidences)
-
         train_acc = np.mean(atk[0])
-        test_acc = np.mean(atk[1])
-        atk_success_rate = (TRAIN_SET_SIZE*train_acc) + (1-TRAIN_SET_SIZE)*(1-test_acc)
+        test_acc = 1.0-np.mean(atk[1])
+        atk_success_rate = ((len(train_idxs)*train_acc) + (len(test_idxs)*test_acc)) / (len(train_idxs) + len(test_idxs))
+        print(ans[0][0].shape, ans[0][1].shape)
+        print(f"Attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
+
+        atk = alt_lira_attack(train_confidences, test_confidences)
+        train_acc = np.mean(atk[0])
+        test_acc = 1.0-np.mean(atk[1])
+        atk_success_rate = ((len(train_idxs)*train_acc) + (len(test_idxs)*test_acc)) / (len(train_idxs) + len(test_idxs))
         print(ans[0][0].shape, ans[0][1].shape)
         print(f"Attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
