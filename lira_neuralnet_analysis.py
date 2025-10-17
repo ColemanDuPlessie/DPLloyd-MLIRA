@@ -11,7 +11,7 @@ def get_confidences(data, model):
     """
     ans = np.array([])
     for batch in tqdm(data):
-        prediction = model(batch[0].to(device)).detach().cpu().numpy()
+        prediction = torch.softmax(model(batch[0].to(device)), dim=1).detach().cpu().numpy()
         confidences = np.max(prediction, axis=1)
         ans = np.concatenate((ans, confidences), axis=0)
     return ans # High numbers indicate the model is highly confident about the sample's classification, which means it is likely in the training set.
@@ -109,10 +109,13 @@ if __name__ == "__main__":
     print(f"Attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%, Threshold: {simplified_atk[2]:.4f}))")
     """
     TRAIN_SET_SIZE = 0.5
-
-    ans = generate_results(num_models=10, private=False)
+    
+    accs = []
+    alt_accs = []
+    
+    ans = generate_results(num_models=64, private=False)
     print("Data generated...")
-    for sample in range(50):
+    for sample in tqdm(range(32)):
         train_idxs = [i for i in range(len(ans)) if sample in ans[i][2]]
         test_idxs = [i for i in range(len(ans)) if sample not in ans[i][2]]
         if len(train_idxs) < 1 or len(test_idxs) < 1:
@@ -125,6 +128,7 @@ if __name__ == "__main__":
         train_acc = np.mean(atk[0])
         test_acc = 1.0-np.mean(atk[1])
         atk_success_rate = ((len(train_idxs)*train_acc) + (len(test_idxs)*test_acc)) / (len(train_idxs) + len(test_idxs))
+        accs.append(atk_success_rate)
         print(ans[0][0].shape, ans[0][1].shape)
         print(f"Attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
 
@@ -132,5 +136,8 @@ if __name__ == "__main__":
         train_acc = np.mean(atk[0])
         test_acc = 1.0-np.mean(atk[1])
         atk_success_rate = ((len(train_idxs)*train_acc) + (len(test_idxs)*test_acc)) / (len(train_idxs) + len(test_idxs))
+        alt_accs.append(atk_success_rate)
         print(ans[0][0].shape, ans[0][1].shape)
         print(f"Attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
+
+    print(f"Average attack success rate: {sum(accs)/len(accs)}, average alt attack success rate: {sum(alt_accs)/len(alt_accs)}")
