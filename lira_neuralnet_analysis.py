@@ -110,6 +110,10 @@ if __name__ == "__main__":
     """
     TRAIN_SET_SIZE = 0.5
     
+    train_count = 0
+    test_count = 0
+    train_data = []
+    test_data = []
     accs = []
     alt_accs = []
     
@@ -123,6 +127,11 @@ if __name__ == "__main__":
         train_confidences = np.array([ans[i][0][list(ans[i][2]).index(sample)] for i in train_idxs])
         test_confidences = np.array([ans[i][1][[j for j in range(50000) if j not in ans[i][2]].index(sample)] for i in test_idxs])
         print(train_confidences.shape, test_confidences.shape, train_confidences, test_confidences)
+
+        train_count += len(train_idxs)
+        test_count += len(test_idxs)
+        train_data.extend(train_confidences)
+        test_data.extend(test_confidences)
 
         atk = lira_attack(train_confidences, test_confidences)
         train_acc = np.mean(atk[0])
@@ -141,3 +150,15 @@ if __name__ == "__main__":
         print(f"Attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
 
     print(f"Average attack success rate: {sum(accs)/len(accs)}, average alt attack success rate: {sum(alt_accs)/len(alt_accs)}")
+
+    atk = lira_attack(np.array(train_data), np.array(test_data))
+    train_acc = np.mean(atk[0])
+    test_acc = 1.0-np.mean(atk[1])
+    atk_success_rate = ((train_count*train_acc) + (test_count*test_acc)) / (train_count + test_count)
+    print(f"Overall attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
+
+    atk = alt_lira_attack(np.array(train_data), np.array(test_data))
+    train_acc = np.mean(atk[0])
+    test_acc = 1.0-np.mean(atk[1])
+    atk_success_rate = ((train_count*train_acc) + (test_count*test_acc)) / (train_count + test_count)
+    print(f"Overall alt attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
