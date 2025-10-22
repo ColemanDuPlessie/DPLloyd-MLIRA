@@ -91,6 +91,65 @@ def alt_lira_attack(train_advantages, test_advantages, train_frac=0.5):
 
     return (train_detected, test_detected, threshold)
 
+def approximate_bilira_attack(train_advantages, test_advantages):
+    """
+    Uses a hasty approximation that assumes the dividing line between in and out points runs orthogonally through the line between the average in point's confidence and the average out point's confidence. It is trivial to come up with examples where this is not true, but those examples may not be common or strong in practice, so hopefully this is a reasonable approximation.
+    """
+    sorted_train_advantages = np.sort(train_advantages)
+    sorted_test_advantages = np.sort(test_advantages)
+
+    train_train_combos = [(i, j) for i in sorted_train_advantages for j in sorted_train_advantages if i < j]
+    train_test_combos = [(i, j) if i < j else (j, i) for i in sorted_train_advantages for j in sorted_test_advantages]
+    test_test_combos = [(i, j) for i in sorted_test_advantages for j in sorted_test_advantages if i < j]
+
+    sorted_train_advantages = np.sort(np.array(train_train_combos + train_test_combos))
+    sorted_test_advantages = np.sort(np.array(test_test_combos))
+
+    train_avg = np.mean(sorted_train_advantages, axis=0)
+    test_avg = np.mean(sorted_test_advantages, axis=0)
+    diff = train_avg-test_avg
+    unit_diff = diff / np.linalg.norm(diff)
+    sorted_train_advantages = np.dot(sorted_train_advantages, unit_diff)
+    sorted_test_advantages = np.dot(sorted_test_advantages, unit_diff)
+
+    print(sorted_train_advantages)
+    print(sorted_train_advantages.shape)
+
+    max_diff = -len(train_advantages)-len(test_advantages) # TODO optimize for true/false positive RATES rather than true/false positive COUNTS?
+    max_diff_point = min(sorted_train_advantages[0], sorted_test_advantages[0])-0.001  # Start with a threshold that classifies everything as being in the training set.
+    train_pointer = 0
+    test_pointer = 0
+    while train_pointer < sorted_train_advantages.shape[0] and test_pointer < sorted_test_advantages.shape[0]:
+        if sorted_train_advantages[train_pointer] < sorted_test_advantages[test_pointer]:
+            train_pointer += 1
+        else:
+            test_pointer += 1
+        diff = test_pointer - train_pointer
+        if diff > max_diff:
+            max_diff = diff
+            try:
+                train_point = sorted_train_advantages[train_pointer-1] if train_pointer != 0 else None
+                test_point = sorted_test_advantages[test_pointer-1] if test_pointer != 0 else None
+                if train_point is None:
+                    if test_point is None:
+                        pass # We are on the first iteration
+                    else:
+                        max_diff_point = test_point + 0.0000001
+                else:
+                    if test_point is None:
+                        max_diff_point = train_point + 0.0000001
+                    else:
+                        max_diff_point = (sorted_train_advantages[train_pointer-1] + sorted_test_advantages[test_pointer-1]) / 2
+            except IndexError:
+                max_diff_point = sorted_train_advantages[train_pointer] if train_pointer < sorted_train_advantages.shape[0] else sorted_test_advantages[test_pointer]
+            max_diff_train_pointer = train_pointer
+            max_diff_test_pointer = test_pointer
+    
+    train_detected = [x > max_diff_point for x in train_advantages]
+    test_detected = [x > max_diff_point for x in test_advantages]
+
+    return (train_detected, test_detected, max_diff_point, len(sorted_train_advantages), len(sorted_test_advantages))
+
 if __name__ == "__main__":
     """
     dummy_train = np.array([1.59066522, 1.32747686, 1.53802216, 1.72594547, 1.26588047, 2.3016057 ])
@@ -107,6 +166,12 @@ if __name__ == "__main__":
     test_acc = 1.0-np.mean(simplified_atk[1])
     atk_success_rate = (0.6*train_acc) + (1-0.6)*(test_acc)
     print(f"Attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%, Threshold: {simplified_atk[2]:.4f}))")
+
+    bi_atk = approximate_bilira_attack(dummy_train, dummy_test)
+    train_acc = np.mean(bi_atk[0])
+    test_acc = 1.0-np.mean(bi_atk[1])
+    atk_success_rate = ((bi_atk[3]*train_acc) + (bi_atk[4])*(test_acc))/(bi_atk[3]+bi_atk[4])
+    print(f"Attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%, Threshold: {bi_atk[2]:.4f})), Train point count: {bi_atk[3]}, Test point count: {bi_atk[4]}")
     """
     TRAIN_SET_SIZE = 0.5
     
@@ -162,3 +227,4 @@ if __name__ == "__main__":
     test_acc = 1.0-np.mean(atk[1])
     atk_success_rate = ((train_count*train_acc) + (test_count*test_acc)) / (train_count + test_count)
     print(f"Overall alt attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
+    
