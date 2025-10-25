@@ -1,4 +1,6 @@
 import numpy as np
+import os
+import scipy
 from tqdm import tqdm
 import torch
 from torchvision import models
@@ -19,16 +21,22 @@ def get_confidences(data, model):
 def generate_results(num_models=128, private=True):
     ans = []
     for i in tqdm(range(num_models)):
-        train_loader, test_loader, train_datapoints = get_CIFAR10(train_set_size=0.5, test_set_is_leftover_train=True, train_datapoints=np.load(f"models/train_set_{i}.npy"))
+        if os.path.exists(f"models/confidences_model_{'private' if private else 'nonprivate'}_{i}.npy"):
+            out = np.load(f"models/confidences_model_{'private' if private else 'nonprivate'}_{i}.npy", allow_pickle=True)
+            ans.append((out[0], out[1], out[2]))
+        else:
+            train_loader, test_loader, train_datapoints = get_CIFAR10(train_set_size=0.5, test_set_is_leftover_train=True, train_datapoints=np.load(f"models/train_set_{i}.npy"))
 
-        model_path = ("models/" + ("private" if private else "nonprivate") + "_resnet18_" + str(i) + ".pt")
-        state_dict = torch.load(model_path, map_location=device)
-        model = models.resnet18(num_classes=10)
-        model = ModuleValidator.fix(model).to(device)
-        model.load_state_dict(state_dict)
+            model_path = ("models/" + ("private" if private else "nonprivate") + "_resnet18_" + str(i) + ".pt")
+            state_dict = torch.load(model_path, map_location=device)
+            model = models.resnet18(num_classes=10)
+            model = ModuleValidator.fix(model).to(device)
+            model.load_state_dict(state_dict)
 
-        out = (get_confidences(train_loader, model), get_confidences(test_loader, model), train_datapoints)
-        ans.append(out)
+            out = (get_confidences(train_loader, model), get_confidences(test_loader, model), train_datapoints)
+            to_save = np.array(out)
+            np.save(f"models/confidences_model_{'private' if private else 'nonprivate'}_{i}.npy", to_save)
+            ans.append(out)
     return ans
 
 def lira_attack(train_advantages, test_advantages):
@@ -85,6 +93,29 @@ def alt_lira_attack(train_advantages, test_advantages, train_frac=0.5):
 
     classified = int((1-train_frac) * sorted_advantages.shape[0])
     threshold = (sorted_advantages[classified-1]+sorted_advantages[classified])/2 # Avoids fencepost errors: if we want the first 5 elements, we want elements 0, 1, 2, 3, 4, not element 5
+    
+    train_detected = [x > threshold for x in train_advantages]
+    test_detected = [x > threshold for x in test_advantages]
+
+    return (train_detected, test_detected, threshold)
+
+def gaussian(x, amplitude, mean, stddev):
+    return amplitude * np.exp(-((x - mean) / (2 * stddev))**2)
+
+def gaussian_lira_attack(train_advantages, test_advantages):
+    """
+    returns two 2D binary arrays whose elements are True if the relevant sample is classified as being in the training set
+    and False if it is classified as being in the test set, according to the LIRA.
+    """
+    train_gaussian = scipy.optimize.curve_fit(gaussian, np.arange(len(train_advantages)), np.sort(train_advantages), p0=[1, np.mean(train_advantages), np.std(train_advantages)])[0]
+    test_gaussian = scipy.optimize.curve_fit(gaussian, np.arange(len(test_advantages)), np.sort(test_advantages), p0=[1, np.mean(test_advantages), np.std(test_advantages)])[0]
+    plt.plot(np.arange(len(train_advantages)), gaussian(np.sort(train_advantages), *train_gaussian), label="Train Gaussian Fit")
+    plt.plot(np.arange(len(test_advantages)), gaussian(np.sort(test_advantages), *test_gaussian), label="Test Gaussian Fit")
+    plt.hist(train_advantages, bins=30, alpha=0.5, label="Train Advantages")
+    plt.hist(test_advantages, bins=30, alpha=0.5, label="Test Advantages")
+    plt.legend()
+    plt.show()
+    threshold = 0 # TODO
     
     train_detected = [x > threshold for x in train_advantages]
     test_detected = [x > threshold for x in test_advantages]
