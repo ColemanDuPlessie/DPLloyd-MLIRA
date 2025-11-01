@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 import os
 import scipy
 from tqdm import tqdm
@@ -107,14 +108,18 @@ def gaussian_lira_attack(train_advantages, test_advantages):
     returns two 2D binary arrays whose elements are True if the relevant sample is classified as being in the training set
     and False if it is classified as being in the test set, according to the LIRA.
     """
-    train_gaussian = scipy.optimize.curve_fit(gaussian, np.arange(len(train_advantages)), np.sort(train_advantages), p0=[1, np.mean(train_advantages), np.std(train_advantages)])[0]
-    test_gaussian = scipy.optimize.curve_fit(gaussian, np.arange(len(test_advantages)), np.sort(test_advantages), p0=[1, np.mean(test_advantages), np.std(test_advantages)])[0]
-    plt.plot(np.arange(len(train_advantages)), gaussian(np.sort(train_advantages), *train_gaussian), label="Train Gaussian Fit")
-    plt.plot(np.arange(len(test_advantages)), gaussian(np.sort(test_advantages), *test_gaussian), label="Test Gaussian Fit")
-    plt.hist(train_advantages, bins=30, alpha=0.5, label="Train Advantages")
-    plt.hist(test_advantages, bins=30, alpha=0.5, label="Test Advantages")
-    plt.legend()
-    plt.show()
+    train_gaussian = scipy.stats.norm.fit(gaussian, np.arange(len(train_advantages))/len(train_advantages-1), np.sort(train_advantages), p0=[1, np.mean(train_advantages), np.std(train_advantages)])[0]
+    test_gaussian = scipy.optimize.curve_fit(gaussian, np.arange(len(test_advantages))/len(test_advantages-1), np.sort(test_advantages), p0=[1, np.mean(test_advantages), np.std(test_advantages)])[0]
+
+    plot = True
+    if plot:
+        plt.plot([i/len(train_advantages-1) for i in np.arange(len(train_advantages))], gaussian(np.sort(train_advantages), *train_gaussian), label="Train Gaussian Fit")
+        plt.plot([i/len(test_advantages-1) for i in np.arange(len(test_advantages))], gaussian(np.sort(test_advantages), *test_gaussian), label="Test Gaussian Fit")
+        plt.hist(train_advantages, bins=30, alpha=0.5, label="Train Advantages")
+        plt.hist(test_advantages, bins=30, alpha=0.5, label="Test Advantages")
+        plt.legend()
+        plt.show()
+    
     threshold = 0 # TODO
     
     train_detected = [x > threshold for x in train_advantages]
@@ -213,9 +218,9 @@ if __name__ == "__main__":
     accs = []
     alt_accs = []
     
-    ans = generate_results(num_models=64, private=False)
+    ans = generate_results(num_models=256, private=False)
     print("Data generated...")
-    for sample in tqdm(range(32)):
+    for sample in tqdm(range(4)):
         train_idxs = [i for i in range(len(ans)) if sample in ans[i][2]]
         test_idxs = [i for i in range(len(ans)) if sample not in ans[i][2]]
         if len(train_idxs) < 1 or len(test_idxs) < 1:
@@ -254,6 +259,12 @@ if __name__ == "__main__":
     print(f"Overall attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
 
     atk = alt_lira_attack(np.array(train_data), np.array(test_data))
+    train_acc = np.mean(atk[0])
+    test_acc = 1.0-np.mean(atk[1])
+    atk_success_rate = ((train_count*train_acc) + (test_count*test_acc)) / (train_count + test_count)
+    print(f"Overall alt attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
+
+    atk = gaussian_lira_attack(np.array(train_data), np.array(test_data))
     train_acc = np.mean(atk[0])
     test_acc = 1.0-np.mean(atk[1])
     atk_success_rate = ((train_count*train_acc) + (test_count*test_acc)) / (train_count + test_count)
