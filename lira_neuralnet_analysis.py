@@ -1,3 +1,4 @@
+from bisect import bisect_left
 import numpy as np
 import matplotlib.pyplot as plt
 import os
@@ -147,10 +148,20 @@ def gaussian_lira_attack(train_advantages, test_advantages):
     return (train_detected, test_detected, threshold)
     """
 
-def approximate_bilira_attack(train_advantages, test_advantages):
+def approximate_bilira_attack(train_advantages1, test_advantages1, train_set1, train_advantages2, test_advantages2, train_set2):
     """
     Uses a hasty approximation that assumes the dividing line between in and out points runs orthogonally through the line between the average in point's confidence and the average out point's confidence. It is trivial to come up with examples where this is not true, but those examples may not be common or strong in practice, so hopefully this is a reasonable approximation.
     """
+    train_advantages = []
+    test_advantages = []
+    for i in range(max((max(train_set1)+1), (max(train_set2)+1))):
+        if i in train_set1 and i in train_set2:
+            train_advantages.append((train_advantages1[train_set1.index(i)], train_advantages2[train_set2.index(i)]))
+        elif i not in train_set1 and i not in train_set2:
+            test_advantages.append((test_advantages1[i - bisect_left(train_set1, i)], test_advantages2[i - bisect_left(train_set2, i)]))
+    sorted_train_advantages = np.sort(np.array(train_advantages), axis=0)
+    sorted_test_advantages = np.sort(np.array(test_advantages), axis=0)
+    """ # TODO this is a fundamentally flawed approach to generating data
     sorted_train_advantages = np.sort(train_advantages)
     sorted_test_advantages = np.sort(test_advantages)
 
@@ -160,6 +171,7 @@ def approximate_bilira_attack(train_advantages, test_advantages):
 
     sorted_train_advantages = np.sort(np.array(train_train_combos + train_test_combos))
     sorted_test_advantages = np.sort(np.array(test_test_combos))
+    """
 
     train_avg = np.mean(sorted_train_advantages, axis=0)
     test_avg = np.mean(sorted_test_advantages, axis=0)
@@ -170,7 +182,9 @@ def approximate_bilira_attack(train_advantages, test_advantages):
 
     print(sorted_train_advantages)
     print(sorted_train_advantages.shape)
+    return gaussian_lira_attack(sorted_train_advantages, sorted_test_advantages)
 
+    """
     max_diff = -len(train_advantages)-len(test_advantages) # TODO optimize for true/false positive RATES rather than true/false positive COUNTS?
     max_diff_point = min(sorted_train_advantages[0], sorted_test_advantages[0])-0.001  # Start with a threshold that classifies everything as being in the training set.
     train_pointer = 0
@@ -205,6 +219,7 @@ def approximate_bilira_attack(train_advantages, test_advantages):
     test_detected = [x > max_diff_point for x in test_advantages]
 
     return (train_detected, test_detected, max_diff_point, len(sorted_train_advantages), len(sorted_test_advantages))
+    """
 
 if __name__ == "__main__":
     """
