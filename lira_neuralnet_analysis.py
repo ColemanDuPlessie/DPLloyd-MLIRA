@@ -103,29 +103,49 @@ def alt_lira_attack(train_advantages, test_advantages, train_frac=0.5):
 def gaussian(x, amplitude, mean, stddev):
     return amplitude * np.exp(-((x - mean) / (2 * stddev))**2)
 
+def find_gaussian_overlap(m1,m2,std1,std2): # TODO generalize this to arbitrary dimensions
+  a = 1/(2*std1**2) - 1/(2*std2**2)
+  b = m2/(std2**2) - m1/(std1**2)
+  c = m1**2 /(2*std1**2) - m2**2 / (2*std2**2) - np.log(std2/std1)
+  return np.roots([a,b,c])
+
 def gaussian_lira_attack(train_advantages, test_advantages):
     """
     returns two 2D binary arrays whose elements are True if the relevant sample is classified as being in the training set
     and False if it is classified as being in the test set, according to the LIRA.
     """
-    train_gaussian = scipy.stats.norm.fit(gaussian, np.arange(len(train_advantages))/len(train_advantages-1), np.sort(train_advantages), p0=[1, np.mean(train_advantages), np.std(train_advantages)])[0]
-    test_gaussian = scipy.optimize.curve_fit(gaussian, np.arange(len(test_advantages))/len(test_advantages-1), np.sort(test_advantages), p0=[1, np.mean(test_advantages), np.std(test_advantages)])[0]
+    train_gaussian = scipy.stats.norm.fit(np.sort(train_advantages))
+    test_gaussian = scipy.stats.norm.fit(np.sort(test_advantages))
 
-    plot = True
+    plot = False
     if plot:
-        plt.plot([i/len(train_advantages-1) for i in np.arange(len(train_advantages))], gaussian(np.sort(train_advantages), *train_gaussian), label="Train Gaussian Fit")
-        plt.plot([i/len(test_advantages-1) for i in np.arange(len(test_advantages))], gaussian(np.sort(test_advantages), *test_gaussian), label="Test Gaussian Fit")
+        plt.plot([i/len(train_advantages-1) for i in np.arange(len(train_advantages))], gaussian(np.sort(train_advantages), 1, *train_gaussian), label="Train Gaussian Fit")
+        plt.plot([i/len(test_advantages-1) for i in np.arange(len(test_advantages))], gaussian(np.sort(test_advantages), 1, *test_gaussian), label="Test Gaussian Fit")
         plt.hist(train_advantages, bins=30, alpha=0.5, label="Train Advantages")
         plt.hist(test_advantages, bins=30, alpha=0.5, label="Test Advantages")
         plt.legend()
         plt.show()
     
-    threshold = 0 # TODO
+    threshold = find_gaussian_overlap(train_gaussian[0], test_gaussian[0], train_gaussian[1], test_gaussian[1])
+    print(threshold)
+
+    ans = None
+    max_count = -1
+    for t in threshold:
+        train_detected = [x > t for x in train_advantages]
+        test_detected = [x > t for x in test_advantages]
+        if sum(train_detected) + (len(test_detected) - sum(test_detected)) > max_count:
+            ans = (train_detected, test_detected, t)
+            max_count = sum(train_detected) + (len(test_detected) - sum(test_detected))
+    return ans
+    """
+    threshold = max(threshold, key=lambda x: x - (train_gaussian[0]+test_gaussian[0])/2 if (x - (train_gaussian[0]+test_gaussian[0])/2) <= 0 else -99999999) # Pick the root closest to the midpoint of the two means without going over, TODO this may not be optimal
     
     train_detected = [x > threshold for x in train_advantages]
     test_detected = [x > threshold for x in test_advantages]
 
     return (train_detected, test_detected, threshold)
+    """
 
 def approximate_bilira_attack(train_advantages, test_advantages):
     """
@@ -197,7 +217,7 @@ if __name__ == "__main__":
     atk_success_rate = (0.6*train_acc) + (1-0.6)*(test_acc)
     print(f"Attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%, Threshold: {atk[2]:.4f})")
 
-    simplified_atk = alt_lira_attack(dummy_train, dummy_test, 0.6)
+    simplified_atk = gaussian_lira_attack(dummy_train, dummy_test)
     train_acc = np.mean(simplified_atk[0])
     test_acc = 1.0-np.mean(simplified_atk[1])
     atk_success_rate = (0.6*train_acc) + (1-0.6)*(test_acc)
@@ -242,7 +262,7 @@ if __name__ == "__main__":
         print(ans[0][0].shape, ans[0][1].shape)
         print(f"Attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
 
-        atk = alt_lira_attack(train_confidences, test_confidences)
+        atk = gaussian_lira_attack(train_confidences, test_confidences)
         train_acc = np.mean(atk[0])
         test_acc = 1.0-np.mean(atk[1])
         atk_success_rate = ((len(train_idxs)*train_acc) + (len(test_idxs)*test_acc)) / (len(train_idxs) + len(test_idxs))
@@ -251,7 +271,8 @@ if __name__ == "__main__":
         print(f"Attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
 
     print(f"Average attack success rate: {sum(accs)/len(accs)}, average alt attack success rate: {sum(alt_accs)/len(alt_accs)}")
-
+    
+    """
     atk = lira_attack(np.array(train_data), np.array(test_data))
     train_acc = np.mean(atk[0])
     test_acc = 1.0-np.mean(atk[1])
@@ -269,4 +290,4 @@ if __name__ == "__main__":
     test_acc = 1.0-np.mean(atk[1])
     atk_success_rate = ((train_count*train_acc) + (test_count*test_acc)) / (train_count + test_count)
     print(f"Overall alt attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
-    
+    """
