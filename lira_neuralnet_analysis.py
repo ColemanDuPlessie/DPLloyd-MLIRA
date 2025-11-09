@@ -246,3 +246,6 @@ if __name__ == "__main__":
         print(f"Simplified two point attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
 
     print(f"Average attack success rate: {sum(accs)/len(accs)}, average gaussian attack success rate: {sum(alt_accs)/len(alt_accs)}, Average simplified two point success rate: {sum(two_point_accs)/len(two_point_accs)}")
+    print("Brute Force Accuracies: " + str(accs))
+    print("Gaussian Accuracies: " + str(alt_accs))
+    print("Simple Two-point Accuracies: " + str(two_point_accs))
