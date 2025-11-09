@@ -41,11 +41,11 @@ def generate_results(num_models=128, private=True):
             ans.append(out)
     return ans
 
-def lira_attack(train_advantages, test_advantages):
+def brute_force_lira_attack(train_advantages, test_advantages):
     """
     returns two 2D binary arrays whose elements are True if the relevant sample is classified as being in the training set
     and False if it is classified as being in the test set, according to the LIRA.
-    """ # TODO rewrite this eventually.
+    """
     sorted_train_advantages = np.sort(train_advantages)
     sorted_test_advantages = np.sort(test_advantages)
 
@@ -86,7 +86,7 @@ def lira_attack(train_advantages, test_advantages):
 
     return (train_detected, test_detected, max_diff_point, max_diff, max_diff_train_pointer, max_diff_test_pointer)
 
-def alt_lira_attack(train_advantages, test_advantages, train_frac=0.5):
+def guessed_threshold_lira_attack(train_advantages, test_advantages, train_frac=0.5):
     """
     returns two 2D binary arrays whose elements are True if the relevant sample is classified as being in the training set
     and False if it is classified as being in the test set, according to the LIRA.
@@ -139,14 +139,6 @@ def gaussian_lira_attack(train_advantages, test_advantages):
             ans = (train_detected, test_detected, t)
             max_count = sum(train_detected) + (len(test_detected) - sum(test_detected))
     return ans
-    """
-    threshold = max(threshold, key=lambda x: x - (train_gaussian[0]+test_gaussian[0])/2 if (x - (train_gaussian[0]+test_gaussian[0])/2) <= 0 else -99999999) # Pick the root closest to the midpoint of the two means without going over, TODO this may not be optimal
-    
-    train_detected = [x > threshold for x in train_advantages]
-    test_detected = [x > threshold for x in test_advantages]
-
-    return (train_detected, test_detected, threshold)
-    """
 
 def approximate_bilira_attack(train_advantages1, test_advantages1, train_set1, train_advantages2, test_advantages2, train_set2):
     """
@@ -161,17 +153,6 @@ def approximate_bilira_attack(train_advantages1, test_advantages1, train_set1, t
             test_advantages.append((test_advantages1[i - bisect_left(train_set1, i)], test_advantages2[i - bisect_left(train_set2, i)]))
     sorted_train_advantages = np.sort(np.array(train_advantages), axis=0)
     sorted_test_advantages = np.sort(np.array(test_advantages), axis=0)
-    """ # TODO this is a fundamentally flawed approach to generating data
-    sorted_train_advantages = np.sort(train_advantages)
-    sorted_test_advantages = np.sort(test_advantages)
-
-    train_train_combos = [(i, j) for i in sorted_train_advantages for j in sorted_train_advantages if i < j]
-    train_test_combos = [(i, j) if i < j else (j, i) for i in sorted_train_advantages for j in sorted_test_advantages]
-    test_test_combos = [(i, j) for i in sorted_test_advantages for j in sorted_test_advantages if i < j]
-
-    sorted_train_advantages = np.sort(np.array(train_train_combos + train_test_combos))
-    sorted_test_advantages = np.sort(np.array(test_test_combos))
-    """
 
     train_avg = np.mean(sorted_train_advantages, axis=0)
     test_avg = np.mean(sorted_test_advantages, axis=0)
@@ -183,43 +164,6 @@ def approximate_bilira_attack(train_advantages1, test_advantages1, train_set1, t
     print(sorted_train_advantages)
     print(sorted_train_advantages.shape)
     return gaussian_lira_attack(sorted_train_advantages, sorted_test_advantages)
-
-    """
-    max_diff = -len(train_advantages)-len(test_advantages) # TODO optimize for true/false positive RATES rather than true/false positive COUNTS?
-    max_diff_point = min(sorted_train_advantages[0], sorted_test_advantages[0])-0.001  # Start with a threshold that classifies everything as being in the training set.
-    train_pointer = 0
-    test_pointer = 0
-    while train_pointer < sorted_train_advantages.shape[0] and test_pointer < sorted_test_advantages.shape[0]:
-        if sorted_train_advantages[train_pointer] < sorted_test_advantages[test_pointer]:
-            train_pointer += 1
-        else:
-            test_pointer += 1
-        diff = test_pointer - train_pointer
-        if diff > max_diff:
-            max_diff = diff
-            try:
-                train_point = sorted_train_advantages[train_pointer-1] if train_pointer != 0 else None
-                test_point = sorted_test_advantages[test_pointer-1] if test_pointer != 0 else None
-                if train_point is None:
-                    if test_point is None:
-                        pass # We are on the first iteration
-                    else:
-                        max_diff_point = test_point + 0.0000001
-                else:
-                    if test_point is None:
-                        max_diff_point = train_point + 0.0000001
-                    else:
-                        max_diff_point = (sorted_train_advantages[train_pointer-1] + sorted_test_advantages[test_pointer-1]) / 2
-            except IndexError:
-                max_diff_point = sorted_train_advantages[train_pointer] if train_pointer < sorted_train_advantages.shape[0] else sorted_test_advantages[test_pointer]
-            max_diff_train_pointer = train_pointer
-            max_diff_test_pointer = test_pointer
-    
-    train_detected = [x > max_diff_point for x in train_advantages]
-    test_detected = [x > max_diff_point for x in test_advantages]
-
-    return (train_detected, test_detected, max_diff_point, len(sorted_train_advantages), len(sorted_test_advantages))
-    """
 
 if __name__ == "__main__":
     """
@@ -265,12 +209,19 @@ if __name__ == "__main__":
         test_confidences = np.array([ans[i][1][[j for j in range(50000) if j not in ans[i][2]].index(sample)] for i in test_idxs])
         print(train_confidences.shape, test_confidences.shape, train_confidences, test_confidences)
 
+        train_idxs2 = [i for i in range(len(ans)) if sample+10000 in ans[i][2]]
+        test_idxs2 = [i for i in range(len(ans)) if sample+10000 not in ans[i][2]]
+        if len(train_idxs2) < 1 or len(test_idxs2) < 1:
+            continue
+        train_confidences2 = np.array([ans[i][0][list(ans[i][2]).index(sample+10000)] for i in train_idxs2])
+        test_confidences2 = np.array([ans[i][1][[j for j in range(50000) if j not in ans[i][2]].index(sample+10000)] for i in test_idxs2])
+
         train_count += len(train_idxs)
         test_count += len(test_idxs)
         train_data.extend(train_confidences)
         test_data.extend(test_confidences)
 
-        atk = lira_attack(train_confidences, test_confidences)
+        atk = brute_force_lira_attack(train_confidences, test_confidences)
         train_acc = np.mean(atk[0])
         test_acc = 1.0-np.mean(atk[1])
         atk_success_rate = ((len(train_idxs)*train_acc) + (len(test_idxs)*test_acc)) / (len(train_idxs) + len(test_idxs))
@@ -286,14 +237,6 @@ if __name__ == "__main__":
         print(ans[0][0].shape, ans[0][1].shape)
         print(f"Attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
 
-        
-        train_idxs2 = [i for i in range(len(ans)) if sample+10000 in ans[i][2]]
-        test_idxs2 = [i for i in range(len(ans)) if sample+10000 not in ans[i][2]]
-        if len(train_idxs2) < 1 or len(test_idxs2) < 1:
-            continue
-        train_confidences2 = np.array([ans[i][0][list(ans[i][2]).index(sample+10000)] for i in train_idxs2])
-        test_confidences2 = np.array([ans[i][1][[j for j in range(50000) if j not in ans[i][2]].index(sample+10000)] for i in test_idxs2])
-
         atk = approximate_bilira_attack(train_confidences, test_confidences, train_idxs, train_confidences2, test_confidences2, train_idxs2)
         train_acc = np.mean(atk[0])
         test_acc = 1.0-np.mean(atk[1])
@@ -303,23 +246,3 @@ if __name__ == "__main__":
         print(f"Simplified two point attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
 
     print(f"Average attack success rate: {sum(accs)/len(accs)}, average gaussian attack success rate: {sum(alt_accs)/len(alt_accs)}, Average simplified two point success rate: {sum(two_point_accs)/len(two_point_accs)}")
-    
-    """
-    atk = lira_attack(np.array(train_data), np.array(test_data))
-    train_acc = np.mean(atk[0])
-    test_acc = 1.0-np.mean(atk[1])
-    atk_success_rate = ((train_count*train_acc) + (test_count*test_acc)) / (train_count + test_count)
-    print(f"Overall attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
-
-    atk = alt_lira_attack(np.array(train_data), np.array(test_data))
-    train_acc = np.mean(atk[0])
-    test_acc = 1.0-np.mean(atk[1])
-    atk_success_rate = ((train_count*train_acc) + (test_count*test_acc)) / (train_count + test_count)
-    print(f"Overall alt attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
-
-    atk = gaussian_lira_attack(np.array(train_data), np.array(test_data))
-    train_acc = np.mean(atk[0])
-    test_acc = 1.0-np.mean(atk[1])
-    atk_success_rate = ((train_count*train_acc) + (test_count*test_acc)) / (train_count + test_count)
-    print(f"Overall alt attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
-    """
