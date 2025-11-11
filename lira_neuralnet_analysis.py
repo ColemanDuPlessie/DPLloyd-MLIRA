@@ -161,8 +161,8 @@ def approximate_bilira_attack(train_advantages1, test_advantages1, train_set1, t
     sorted_train_advantages = np.dot(sorted_train_advantages, unit_diff)
     sorted_test_advantages = np.dot(sorted_test_advantages, unit_diff)
 
-    print(sorted_train_advantages)
-    print(sorted_train_advantages.shape)
+    # print(sorted_train_advantages)
+    # print(sorted_train_advantages.shape)
     return gaussian_lira_attack(sorted_train_advantages, sorted_test_advantages)
 
 if __name__ == "__main__":
@@ -200,14 +200,14 @@ if __name__ == "__main__":
     
     ans = generate_results(num_models=256, private=False)
     print("Data generated...")
-    for sample in tqdm(range(4)):
+    for sample in tqdm(range(128)):
         train_idxs = [i for i in range(len(ans)) if sample in ans[i][2]]
         test_idxs = [i for i in range(len(ans)) if sample not in ans[i][2]]
         if len(train_idxs) < 1 or len(test_idxs) < 1:
             continue
         train_confidences = np.array([ans[i][0][list(ans[i][2]).index(sample)] for i in train_idxs])
         test_confidences = np.array([ans[i][1][[j for j in range(50000) if j not in ans[i][2]].index(sample)] for i in test_idxs])
-        print(train_confidences.shape, test_confidences.shape, train_confidences, test_confidences)
+        # print(train_confidences.shape, test_confidences.shape, train_confidences, test_confidences)
 
         train_idxs2 = [i for i in range(len(ans)) if sample+10000 in ans[i][2]]
         test_idxs2 = [i for i in range(len(ans)) if sample+10000 not in ans[i][2]]
@@ -226,24 +226,24 @@ if __name__ == "__main__":
         test_acc = 1.0-np.mean(atk[1])
         atk_success_rate = ((len(train_idxs)*train_acc) + (len(test_idxs)*test_acc)) / (len(train_idxs) + len(test_idxs))
         accs.append(atk_success_rate)
-        print(ans[0][0].shape, ans[0][1].shape)
-        print(f"Attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
+        # print(ans[0][0].shape, ans[0][1].shape)
+        # print(f"Attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
 
         atk = gaussian_lira_attack(train_confidences, test_confidences)
         train_acc = np.mean(atk[0])
         test_acc = 1.0-np.mean(atk[1])
         atk_success_rate = ((len(train_idxs)*train_acc) + (len(test_idxs)*test_acc)) / (len(train_idxs) + len(test_idxs))
         alt_accs.append(atk_success_rate)
-        print(ans[0][0].shape, ans[0][1].shape)
-        print(f"Attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
+        # print(ans[0][0].shape, ans[0][1].shape)
+        # print(f"Attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
 
         atk = approximate_bilira_attack(train_confidences, test_confidences, train_idxs, train_confidences2, test_confidences2, train_idxs2)
         train_acc = np.mean(atk[0])
         test_acc = 1.0-np.mean(atk[1])
         atk_success_rate = (train_acc*len(atk[0])+test_acc*len(atk[1]))/(len(atk[0])+len(atk[1]))
         two_point_accs.append(atk_success_rate)
-        print(ans[0][0].shape, ans[0][1].shape)
-        print(f"Simplified two point attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
+        # print(ans[0][0].shape, ans[0][1].shape)
+        # print(f"Simplified two point attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
 
     print(f"Average attack success rate: {sum(accs)/len(accs)}, average gaussian attack success rate: {sum(alt_accs)/len(alt_accs)}, Average simplified two point success rate: {sum(two_point_accs)/len(two_point_accs)}")
     print("Brute Force Accuracies: " + str(accs))
