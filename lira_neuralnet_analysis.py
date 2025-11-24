@@ -165,6 +165,33 @@ def approximate_bilira_attack(train_advantages1, test_advantages1, train_set1, t
     # print(sorted_train_advantages.shape)
     return gaussian_lira_attack(sorted_train_advantages, sorted_test_advantages)
 
+def approximate_multi_lira_attack(multi_train_advantages, multi_test_advantages, multi_train_set):
+    """
+    Uses a hasty approximation that assumes the dividing hyperplane between in and out points is normal to the line between the average in point's confidence and the average out point's confidence. It is trivial to come up with examples where this is not true, but those examples may not be common or strong in practice, so hopefully this is a reasonable approximation. This approximation also has the benefit that we can deal with d dimensions in O(d) time.
+
+    Assumes that each input is an iterable of the relevant information across dimensions (i.e. when len(multi_train_advantages) == 2, this is the same as approximate_bilira_attack)
+    """
+    train_advantages = []
+    test_advantages = []
+    for i in range(max(map(max, multi_train_set))+1):
+        if all((i in t for t in multi_train_set)):
+            train_advantages.append([multi_train_advantages[n][multi_train_set[n].index(i)] for n in range(len(multi_train_set))])
+        elif all((i not in t for t in multi_train_set)):
+            test_advantages.append([multi_test_advantages[n][i - bisect_left(multi_train_set[n], i)] for n in range(len(multi_train_set))])
+    sorted_train_advantages = np.sort(np.array(train_advantages), axis=0)
+    sorted_test_advantages = np.sort(np.array(test_advantages), axis=0)
+
+    train_avg = np.mean(sorted_train_advantages, axis=0)
+    test_avg = np.mean(sorted_test_advantages, axis=0)
+    diff = train_avg-test_avg
+    unit_diff = diff / np.linalg.norm(diff)
+    sorted_train_advantages = np.dot(sorted_train_advantages, unit_diff)
+    sorted_test_advantages = np.dot(sorted_test_advantages, unit_diff)
+
+    # print(sorted_train_advantages)
+    # print(sorted_train_advantages.shape)
+    return gaussian_lira_attack(sorted_train_advantages, sorted_test_advantages)
+
 if __name__ == "__main__":
     """
     dummy_train = np.array([1.59066522, 1.32747686, 1.53802216, 1.72594547, 1.26588047, 2.3016057 ])
