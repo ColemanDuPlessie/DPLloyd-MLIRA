@@ -1,0 +1,22 @@
+nohup: ignoring input
+Unable to init server: Could not connect: Connection refused
+Unable to init server: Could not connect: Connection refused
+
+(lira_neuralnet_analysis.py:2370535): Gdk-CRITICAL **: 12:23:26.623: gdk_cursor_new_for_display: assertion 'GDK_IS_DISPLAY (display)' failed
+/usr/local/lib/python3.8/dist-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: /usr/local/lib/python3.8/dist-packages/torchvision/image.so: undefined symbol: _ZN3c1017RegisterOperatorsD1Ev
+  warn(f"Failed to load image Python extension: {e}")
+  0%|          | 0/256 [00:00<?, ?it/s]  0%|          | 0/256 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "lira_neuralnet_analysis.py", line 201, in <module>
+    ans = generate_results(num_models=256, private=True)
+  File "lira_neuralnet_analysis.py", line 30, in generate_results
+    train_loader, test_loader, train_datapoints = get_CIFAR10(train_set_size=0.5, test_set_is_leftover_train=True, train_datapoints=np.load(f"models/train_set_{i}.npy"))
+  File "/home/cdupe/MLIRA/DPLloyd-MLIRA/neuralnet.py", line 33, in get_CIFAR10
+    raw_dataset = CIFAR10(
+  File "/usr/local/lib/python3.8/dist-packages/torchvision/datasets/cifar.py", line 60, in __init__
+    super().__init__(root, transform=transform, target_transform=target_transform)
+  File "/usr/local/lib/python3.8/dist-packages/torchvision/datasets/vision.py", line 39, in __init__
+    if isinstance(root, torch._six.string_classes):
+  File "/home/cdupe/.local/lib/python3.8/site-packages/torch/__init__.py", line 2216, in __getattr__
+    raise AttributeError(f"module '{__name__}' has no attribute '{name}'")
+AttributeError: module 'torch' has no attribute '_six'

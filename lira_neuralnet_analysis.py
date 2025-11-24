@@ -20,9 +20,9 @@ def get_confidences(data, model):
         ans = np.concatenate((ans, confidences), axis=0)
     return ans # High numbers indicate the model is highly confident about the sample's classification, which means it is likely in the training set.
 
-def generate_results(num_models=128, private=True):
+def generate_results(num_models=128, model_start=0, private=True):
     ans = []
-    for i in tqdm(range(num_models)):
+    for i in tqdm(range(model_start, model_start+num_models)):
         if os.path.exists(f"models/confidences_model_{'private' if private else 'nonprivate'}_{i}.npy"):
             out = np.load(f"models/confidences_model_{'private' if private else 'nonprivate'}_{i}.npy", allow_pickle=True)
             ans.append((out[0], out[1], out[2]))
@@ -33,7 +33,7 @@ def generate_results(num_models=128, private=True):
             state_dict = torch.load(model_path, map_location=device)
             model = models.resnet18(num_classes=10)
             model = ModuleValidator.fix(model).to(device)
-            model.load_state_dict(state_dict)
+            model.load_state_dict(state_dict, strict=False)
 
             out = (get_confidences(train_loader, model), get_confidences(test_loader, model), train_datapoints)
             to_save = np.array(out)
@@ -198,7 +198,7 @@ if __name__ == "__main__":
     alt_accs = []
     two_point_accs = []
     
-    ans = generate_results(num_models=256, private=False)
+    ans = generate_results(num_models=64, model_start=256, private=True)
     print("Data generated...")
     for sample in tqdm(range(128)):
         train_idxs = [i for i in range(len(ans)) if sample in ans[i][2]]

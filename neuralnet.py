@@ -40,6 +40,8 @@ def get_CIFAR10(train_set_size=1.0, test_set_is_leftover_train=False, train_data
         else:
             train_indices = train_datapoints
         train_dataset = torch.utils.data.Subset(raw_dataset, train_indices)
+    else:
+        train_dataset = raw_dataset
     train_loader = torch.utils.data.DataLoader(
         train_dataset,
         batch_size=BATCH_SIZE,
