@@ -110,11 +110,34 @@ def find_gaussian_overlap(m1,m2,std1,std2): # TODO generalize this to arbitrary 
   c = m1**2 /(2*std1**2) - m2**2 / (2*std2**2) - np.log(std2/std1)
   return np.roots([a,b,c])
 
-def gaussian_lira_attack(train_advantages, test_advantages):
+def gaussian_lira_attack(train_advantages, test_advantages, train_test_set=None):
     """
     returns two 2D binary arrays whose elements are True if the relevant sample is classified as being in the training set
     and False if it is classified as being in the test set, according to the LIRA.
     """
+    if train_test_set is not None: # A 2-tuple that is (list of points in train_advantages, list of points in train_advantages2), where train_advantages2 is the data for another data point being fed into the 2-point LIRA.
+        new_train_advantages = []
+        new_test_advantages = []
+        train_pointer = 0
+        test_pointer = 0
+        i = 0
+        while True:
+            if i in train_test_set[0] and i in train_test_set[1]:
+                new_train_advantages.append(train_advantages[train_pointer])
+                train_pointer += 1
+            elif i not in train_test_set[0] and i not in train_test_set[1]:
+                new_test_advantages.append(test_advantages[test_pointer])
+                test_pointer += 1
+            elif i in train_test_set[0]:
+                train_pointer += 1
+            else:
+                test_pointer += 1
+            i += 1
+            if train_pointer >= len(train_advantages) and test_pointer >= len(test_advantages):
+                break
+        train_advantages = np.array(new_train_advantages)
+        test_advantages = np.array(new_test_advantages)
+
     train_gaussian = scipy.stats.norm.fit(np.sort(train_advantages))
     test_gaussian = scipy.stats.norm.fit(np.sort(test_advantages))
 
@@ -154,7 +177,7 @@ def approximate_bilira_attack(train_advantages1, test_advantages1, train_set1, t
     sorted_train_advantages = np.sort(np.array(train_advantages), axis=0)
     sorted_test_advantages = np.sort(np.array(test_advantages), axis=0)
 
-    print("Beginning 2-point LIRA attack with " + len(sorted_train_advantages) + " train pairs and " + len(sorted_test_advantages) + " test pairs.")
+    print("Beginning 2-point LIRA attack with " + str(len(sorted_train_advantages)) + " train pairs and " + str(len(sorted_test_advantages)) + " test pairs.")
 
     train_avg = np.mean(sorted_train_advantages, axis=0)
     test_avg = np.mean(sorted_test_advantages, axis=0)
@@ -225,14 +248,16 @@ if __name__ == "__main__":
     test_data = []
     accs = []
     alt_accs = []
+    weakened_accs = []
     two_point_accs = []
     balanced_accs = []
     balanced_alt_accs = []
+    balanced_weakened_accs = []
     balanced_two_point_accs = []
     
-    ans = generate_results(num_models=64, model_start=256, private=True)
+    ans = generate_results(num_models=256, model_start=0, private=False)
     print("Data generated...")
-    for sample in tqdm(range(128)):
+    for sample in tqdm(range(4)):
         train_idxs = [i for i in range(len(ans)) if sample in ans[i][2]]
         test_idxs = [i for i in range(len(ans)) if sample not in ans[i][2]]
         if len(train_idxs) < 1 or len(test_idxs) < 1:
@@ -273,6 +298,20 @@ if __name__ == "__main__":
         # print(ans[0][0].shape, ans[0][1].shape)
         # print(f"Attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
 
+        print("Gaussian acc: " + str(alt_accs[-1]) + ", Balanced gaussian acc: " + str(balanced_alt_accs[-1]))
+
+        atk = gaussian_lira_attack(train_confidences, test_confidences, (train_idxs, train_idxs2))
+        train_acc = np.mean(atk[0])
+        test_acc = 1.0-np.mean(atk[1])
+        atk_success_rate = ((len(train_idxs)*train_acc) + (len(test_idxs)*test_acc)) / (len(train_idxs) + len(test_idxs))
+        balanced_atk_success_rate = (train_acc+test_acc)/2
+        weakened_accs.append(atk_success_rate)
+        balanced_weakened_accs.append(balanced_atk_success_rate)
+        # print(ans[0][0].shape, ans[0][1].shape)
+        # print(f"Attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
+
+        print("Weakened gaussian acc: " + str(weakened_accs[-1]) + ", Balanced weakened gaussian acc: " + str(balanced_weakened_accs[-1]))
+
         atk = approximate_bilira_attack(train_confidences, test_confidences, train_idxs, train_confidences2, test_confidences2, train_idxs2)
         train_acc = np.mean(atk[0])
         test_acc = 1.0-np.mean(atk[1])
@@ -283,7 +322,10 @@ if __name__ == "__main__":
         # print(ans[0][0].shape, ans[0][1].shape)
         # print(f"Simplified two point attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
 
-    print(f"Average attack success rate: {sum(accs)/len(accs)}, average gaussian attack success rate: {sum(alt_accs)/len(alt_accs)}, Average simplified two point success rate: {sum(two_point_accs)/len(two_point_accs)}")
+        print("2-point acc: " + str(two_point_accs[-1]) + ", Balanced 2-point acc: " + str(balanced_two_point_accs[-1]))
+
+    print(f"Average attack success rate: {sum(accs)/len(accs)}, average gaussian attack success rate: {sum(alt_accs)/len(alt_accs)}, average weakened gaussian attack success rate: {sum(weakened_accs)/len(weakened_accs)}, Average simplified two point success rate: {sum(two_point_accs)/len(two_point_accs)}")
     print("Brute Force Accuracies: " + str(accs))
     print("Gaussian Accuracies: " + str(alt_accs))
+    print("Weakened Gaussian Accuracies: " + str(weakened_accs))
     print("Simple Two-point Accuracies: " + str(two_point_accs))
