@@ -224,6 +224,9 @@ if __name__ == "__main__":
     accs = []
     alt_accs = []
     two_point_accs = []
+    balanced_accs = []
+    balanced_alt_accs = []
+    balanced_two_point_accs = []
     
     ans = generate_results(num_models=256, private=False)
     print("Data generated...")
@@ -252,7 +255,9 @@ if __name__ == "__main__":
         train_acc = np.mean(atk[0])
         test_acc = 1.0-np.mean(atk[1])
         atk_success_rate = ((len(train_idxs)*train_acc) + (len(test_idxs)*test_acc)) / (len(train_idxs) + len(test_idxs))
+        balanced_atk_success_rate = (train_acc+test_acc)/2
         accs.append(atk_success_rate)
+        balanced_accs.append(balanced_atk_success_rate)
         # print(ans[0][0].shape, ans[0][1].shape)
         # print(f"Attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
 
@@ -260,7 +265,9 @@ if __name__ == "__main__":
         train_acc = np.mean(atk[0])
         test_acc = 1.0-np.mean(atk[1])
         atk_success_rate = ((len(train_idxs)*train_acc) + (len(test_idxs)*test_acc)) / (len(train_idxs) + len(test_idxs))
+        balanced_atk_success_rate = (train_acc+test_acc)/2
         alt_accs.append(atk_success_rate)
+        balanced_alt_accs.append(balanced_atk_success_rate)
         # print(ans[0][0].shape, ans[0][1].shape)
         # print(f"Attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
 
@@ -268,7 +275,9 @@ if __name__ == "__main__":
         train_acc = np.mean(atk[0])
         test_acc = 1.0-np.mean(atk[1])
         atk_success_rate = (train_acc*len(atk[0])+test_acc*len(atk[1]))/(len(atk[0])+len(atk[1]))
+        balanced_atk_success_rate = (train_acc+test_acc)/2
         two_point_accs.append(atk_success_rate)
+        balanced_two_point_accs.append(balanced_atk_success_rate)
         # print(ans[0][0].shape, ans[0][1].shape)
         # print(f"Simplified two point attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
 
