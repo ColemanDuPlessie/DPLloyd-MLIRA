@@ -154,6 +154,8 @@ def approximate_bilira_attack(train_advantages1, test_advantages1, train_set1, t
     sorted_train_advantages = np.sort(np.array(train_advantages), axis=0)
     sorted_test_advantages = np.sort(np.array(test_advantages), axis=0)
 
+    print("Beginning 2-point LIRA attack with " + len(sorted_train_advantages) + " train pairs and " + len(sorted_test_advantages) + " test pairs.")
+
     train_avg = np.mean(sorted_train_advantages, axis=0)
     test_avg = np.mean(sorted_test_advantages, axis=0)
     diff = train_avg-test_avg
