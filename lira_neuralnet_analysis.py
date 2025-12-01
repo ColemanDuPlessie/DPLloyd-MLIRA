@@ -329,3 +329,8 @@ if __name__ == "__main__":
     print("Gaussian Accuracies: " + str(alt_accs))
     print("Weakened Gaussian Accuracies: " + str(weakened_accs))
     print("Simple Two-point Accuracies: " + str(two_point_accs))
+
+    print("Balanced Brute Force Accuracies: " + str(balanced_accs))
+    print("Balanced Gaussian Accuracies: " + str(balanced_alt_accs))
+    print("Balanced Weakened Gaussian Accuracies: " + str(balanced_weakened_accs))
+    print("Balanced Simple Two-point Accuracies: " + str(balanced_two_point_accs))
