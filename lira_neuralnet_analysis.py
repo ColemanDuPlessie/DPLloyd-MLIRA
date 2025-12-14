@@ -181,7 +181,7 @@ def approximate_bilira_attack(train_advantages1, test_advantages1, train_set1, t
             test_advantages.append((test_advantages1[i - bisect_left(train_set1, i)], test_advantages2[i - bisect_left(train_set2, i)]))
 
     if plot:
-        plot_bilira_categorization(train_advantages, test_advantages)
+        plot_bilira_categorization(np.array(train_advantages), np.array(test_advantages))
 
     print("Beginning 2-point LIRA attack with " + str(len(train_advantages)) + " train pairs and " + str(len(test_advantages)) + " test pairs.")
 
