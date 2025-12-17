@@ -1,0 +1,1039 @@
+nohup: ignoring input
+Unable to init server: Could not connect: Connection refused
+Unable to init server: Could not connect: Connection refused
+
+(lira_neuralnet_analysis.py:389691): Gdk-CRITICAL **: 22:56:08.376: gdk_cursor_new_for_display: assertion 'GDK_IS_DISPLAY (display)' failed
+  0%|          | 0/512 [00:00<?, ?it/s] 60%|██████    | 308/512 [00:00<00:00, 3078.79it/s]100%|██████████| 512/512 [00:00<00:00, 3047.16it/s]
+Data generated...
+  0%|          | 0/128 [00:00<?, ?it/s]  1%|          | 1/128 [04:21<9:14:12, 261.83s/it]  2%|▏         | 2/128 [08:43<9:10:03, 261.93s/it]  2%|▏         | 3/128 [13:19<9:19:02, 268.34s/it]  3%|▎         | 4/128 [17:55<9:20:13, 271.08s/it]  4%|▍         | 5/128 [22:24<9:14:24, 270.45s/it]  5%|▍         | 6/128 [26:43<9:02:12, 266.66s/it]  5%|▌         | 7/128 [31:01<8:52:12, 263.90s/it]  6%|▋         | 8/128 [35:30<8:50:36, 265.31s/it]  7%|▋         | 9/128 [39:55<8:45:56, 265.18s/it]  8%|▊         | 10/128 [44:19<8:41:10, 265.01s/it]  9%|▊         | 11/128 [48:47<8:38:23, 265.84s/it]  9%|▉         | 12/128 [53:14<8:34:27, 266.10s/it] 10%|█         | 13/128 [57:47<8:34:08, 268.25s/it] 11%|█         | 14/128 [1:02:20<8:32:41, 269.84s/it] 12%|█▏        | 15/128 [1:06:51<8:28:26, 269.97s/it] 12%|█▎        | 16/128 [1:11:27<8:27:24, 271.82s/it] 13%|█▎        | 17/128 [1:15:58<8:22:20, 271.53s/it] 14%|█▍        | 18/128 [1:20:18<8:11:45, 268.23s/it]Beginning 3-point LIRA attack with 72 train pairs and 57 test pairs.
+[0.8307989  0.31709408]
+Three point acc: 0.513671875, Balanced three point acc: 0.5
+[0.53030507 0.13133297]
+Weakened gaussian acc: 0.513671875, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 72 train pairs and 57 test pairs.
+[0.74522337 0.261187  ]
+2-point acc: 0.5581395348837209, Balanced 2-point acc: 0.5
+Beginning 3-point LIRA attack with 71 train pairs and 57 test pairs.
+[1.12798036 0.48874827]
+Three point acc: 0.515625, Balanced three point acc: 0.5
+[0.65733894 0.22648716]
+Weakened gaussian acc: 0.515625, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 71 train pairs and 57 test pairs.
+[0.91794051 0.32730668]
+2-point acc: 0.5546875, Balanced 2-point acc: 0.5
+Beginning 3-point LIRA attack with 55 train pairs and 70 test pairs.
+[0.51323987 0.24112305]
+Three point acc: 0.4929383116883117, Balanced three point acc: 0.5038961038961038
+[0.75328778 0.3354677 ]
+Weakened gaussian acc: 0.504591112012987, Balanced weakened gaussian acc: 0.5123376623376623
+Beginning 2-point LIRA attack with 55 train pairs and 70 test pairs.
+[0.9702045  0.06709693]
+2-point acc: 0.56, Balanced 2-point acc: 0.538961038961039
+Beginning 3-point LIRA attack with 61 train pairs and 65 test pairs.
+[0.9497798  0.28593089]
+Three point acc: 0.541032865699874, Balanced three point acc: 0.5271122320302648
+[0.69983621 0.32865189]
+Weakened gaussian acc: 0.5169820893757882, Balanced weakened gaussian acc: 0.5055485498108448
+Beginning 2-point LIRA attack with 61 train pairs and 65 test pairs.
+[0.80083523 0.26340233]
+2-point acc: 0.5396825396825397, Balanced 2-point acc: 0.5271122320302648
+Beginning 3-point LIRA attack with 58 train pairs and 61 test pairs.
+[5.81570901 0.44027895]
+Three point acc: 0.6023088609383833, Balanced three point acc: 0.6037309214245337
+[0.75211162 0.39029223]
+Weakened gaussian acc: 0.5022550920364612, Balanced weakened gaussian acc: 0.5120124364047485
+Beginning 2-point LIRA attack with 58 train pairs and 61 test pairs.
+[0.73960641 0.16839281]
+2-point acc: 0.5378151260504201, Balanced 2-point acc: 0.5305257207461843
+Beginning 3-point LIRA attack with 72 train pairs and 70 test pairs.
+[0.93150482 0.35310933]
+Three point acc: 0.525390625, Balanced three point acc: 0.5
+[0.64021892 0.27278235]
+Weakened gaussian acc: 0.49282226562500003, Balanced weakened gaussian acc: 0.5125
+Beginning 2-point LIRA attack with 72 train pairs and 70 test pairs.
+[0.76106731 0.27987648]
+2-point acc: 0.5070422535211268, Balanced 2-point acc: 0.5
+Beginning 3-point LIRA attack with 64 train pairs and 48 test pairs.
+[-1.01022148 -0.24735951]
+Three point acc: 0.56793212890625, Balanced three point acc: 0.546875
+[0.602108   0.11416736]
+Weakened gaussian acc: 0.529296875, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 64 train pairs and 48 test pairs.
+[-0.83366893 -0.14049794]
+2-point acc: 0.5982142857142857, Balanced 2-point acc: 0.546875
+Beginning 3-point LIRA attack with 73 train pairs and 65 test pairs.
+[-0.54992536  0.05587159]
+Three point acc: 0.6026541095890411, Balanced three point acc: 0.5972602739726027
+[ 0.60913526 -0.17436495]
+Weakened gaussian acc: 0.513671875, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 73 train pairs and 65 test pairs.
+[-0.61083493  0.18130008]
+2-point acc: 0.6231884057971014, Balanced 2-point acc: 0.6126448893572181
+Beginning 3-point LIRA attack with 70 train pairs and 60 test pairs.
+[1.12299263 0.64173587]
+Three point acc: 0.5140345982142858, Balanced three point acc: 0.4928571428571429
+[0.8016075  0.50491968]
+Weakened gaussian acc: 0.4948381696428571, Balanced weakened gaussian acc: 0.47857142857142854
+Beginning 2-point LIRA attack with 70 train pairs and 60 test pairs.
+[1.13307958 0.80501474]
+2-point acc: 0.5230769230769231, Balanced 2-point acc: 0.4880952380952381
+Beginning 3-point LIRA attack with 69 train pairs and 70 test pairs.
+[-0.8230964  -0.11279432]
+Three point acc: 0.5333782188146998, Balanced three point acc: 0.520600414078675
+[ 0.56154034 -0.2855825 ]
+Weakened gaussian acc: 0.517578125, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 69 train pairs and 70 test pairs.
+[ 1.09937411 -0.70142654]
+2-point acc: 0.5611510791366906, Balanced 2-point acc: 0.5626293995859213
+Beginning 3-point LIRA attack with 60 train pairs and 57 test pairs.
+[3.20816376 0.57868826]
+Three point acc: 0.5108072916666667, Balanced three point acc: 0.5166666666666667
+[1.00594576 0.46071046]
+Weakened gaussian acc: 0.496703673245614, Balanced weakened gaussian acc: 0.493859649122807
+Beginning 2-point LIRA attack with 60 train pairs and 57 test pairs.
+[0.89182422 0.38366912]
+2-point acc: 0.5042735042735043, Balanced 2-point acc: 0.5026315789473684
+Beginning 3-point LIRA attack with 61 train pairs and 60 test pairs.
+[ 0.79585594 -0.26460756]
+Three point acc: 0.490234375, Balanced three point acc: 0.5
+[1.08806682 0.54095449]
+Weakened gaussian acc: 0.5494813012295082, Balanced weakened gaussian acc: 0.5524590163934426
+Beginning 2-point LIRA attack with 61 train pairs and 60 test pairs.
+[1.17623961 0.56095943]
+2-point acc: 0.5371900826446281, Balanced 2-point acc: 0.5360655737704918
+Beginning 3-point LIRA attack with 65 train pairs and 66 test pairs.
+[0.89628805 0.34398551]
+Three point acc: 0.5377426609848485, Balanced three point acc: 0.5236596736596737
+[0.55588561 0.11488615]
+Weakened gaussian acc: 0.5108546401515152, Balanced weakened gaussian acc: 0.5018648018648019
+Beginning 2-point LIRA attack with 65 train pairs and 66 test pairs.
+[0.74299181 0.2276314 ]
+2-point acc: 0.5267175572519084, Balanced 2-point acc: 0.5237762237762238
+Beginning 3-point LIRA attack with 63 train pairs and 67 test pairs.
+[-0.84153719 -0.27754849]
+Three point acc: 0.5986473880597014, Balanced three point acc: 0.5972518360578062
+[0.83796785 0.35834659]
+Weakened gaussian acc: 0.5241371268656716, Balanced weakened gaussian acc: 0.5172944799810472
+Beginning 2-point LIRA attack with 63 train pairs and 67 test pairs.
+[-0.90863061 -0.40753807]
+2-point acc: 0.5923076923076923, Balanced 2-point acc: 0.5878938640132669
+Beginning 3-point LIRA attack with 56 train pairs and 57 test pairs.
+[0.98299515 0.3445724 ]
+Three point acc: 0.5286703085839599, Balanced three point acc: 0.5100250626566416
+[0.60392592 0.11352211]
+Weakened gaussian acc: 0.5518691748903508, Balanced weakened gaussian acc: 0.5372807017543859
+Beginning 2-point LIRA attack with 56 train pairs and 57 test pairs.
+[0.82668255 0.22546209]
+2-point acc: 0.504424778761062, Balanced 2-point acc: 0.5012531328320802
+Beginning 3-point LIRA attack with 71 train pairs and 69 test pairs.
+[-0.74533446 -0.12831542]
+Three point acc: 0.5124626837109614, Balanced three point acc: 0.5171463563992651
+[0.63241603 0.08422741]
+Weakened gaussian acc: 0.4921875, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 71 train pairs and 69 test pairs.
+[-0.92122991 -0.31163229]
+2-point acc: 0.5357142857142856, Balanced 2-point acc: 0.5308226168605837
+Beginning 3-point LIRA attack with 62 train pairs and 70 test pairs.
+[ 0.92666488 -0.17296247]
+Three point acc: 0.5516030025921659, Balanced three point acc: 0.5504608294930875
+[1.98759667 0.56551091]
+Weakened gaussian acc: 0.501953125, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 62 train pairs and 70 test pairs.
+[2.23986244 0.67733701]
+2-point acc: 0.5303030303030303, Balanced 2-point acc: 0.5
+Beginning 3-point LIRA attack with 64 train pairs and 53 test pairs.
+[-1.17722876 -0.60001254]
+Three point acc: 0.5498737839033019, Balanced three point acc: 0.558372641509434
+[0.6156788  0.22970527]
+Weakened gaussian acc: 0.5021178047612028, Balanced weakened gaussian acc: 0.47037146226415094
+Beginning 2-point LIRA attack with 64 train pairs and 53 test pairs.
+[-0.75999455 -0.3493173 ]
+2-point acc: 0.5384615384615384, Balanced 2-point acc: 0.5002948113207547
+Beginning 3-point LIRA attack with 65 train pairs and 63 test pairs.
+[-1.03875447 -0.29796752]
+Three point acc: 0.59375, Balanced three point acc: 0.5934065934065934
+[0.51634829 0.09010826]
+ 15%|█▍        | 19/128 [1:24:44<8:05:55, 267.48s/it] 16%|█▌        | 20/128 [1:29:19<8:05:25, 269.68s/it] 16%|█▋        | 21/128 [1:33:40<7:56:16, 267.07s/it] 17%|█▋        | 22/128 [1:38:15<7:56:24, 269.66s/it] 18%|█▊        | 23/128 [1:42:44<7:51:32, 269.45s/it] 19%|█▉        | 24/128 [1:47:05<7:42:17, 266.71s/it] 20%|█▉        | 25/128 [1:51:37<7:40:57, 268.51s/it] 20%|██        | 26/128 [1:56:09<7:37:57, 269.39s/it] 21%|██        | 27/128 [2:00:52<7:40:17, 273.44s/it] 22%|██▏       | 28/128 [2:05:08<7:27:10, 268.30s/it] 23%|██▎       | 29/128 [2:09:37<7:22:55, 268.44s/it] 23%|██▎       | 30/128 [2:14:23<7:27:12, 273.80s/it] 24%|██▍       | 31/128 [2:18:42<7:15:35, 269.44s/it] 25%|██▌       | 32/128 [2:23:17<7:13:21, 270.85s/it] 26%|██▌       | 33/128 [2:27:37<7:03:52, 267.71s/it] 27%|██▋       | 34/128 [2:32:11<7:02:29, 269.68s/it] 27%|██▋       | 35/128 [2:36:56<7:05:09, 274.30s/it] 28%|██▊       | 36/128 [2:41:32<7:01:01, 274.58s/it] 29%|██▉       | 37/128 [2:45:54<6:50:55, 270.94s/it]Weakened gaussian acc: 0.5078125, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 65 train pairs and 63 test pairs.
+[-1.55921145 -0.28748111]
+2-point acc: 0.6015625, Balanced 2-point acc: 0.6006105006105007
+Beginning 3-point LIRA attack with 63 train pairs and 69 test pairs.
+[-0.52918806 -0.079511  ]
+Three point acc: 0.51953125, Balanced three point acc: 0.5
+[0.51377765 0.05002664]
+Weakened gaussian acc: 0.5055399197722568, Balanced weakened gaussian acc: 0.4930986887508627
+Beginning 2-point LIRA attack with 63 train pairs and 69 test pairs.
+[-0.66422932 -0.16516572]
+2-point acc: 0.5227272727272727, Balanced 2-point acc: 0.5
+Beginning 3-point LIRA attack with 80 train pairs and 65 test pairs.
+[0.3860824  0.00932176]
+Three point acc: 0.4876953125, Balanced three point acc: 0.49519230769230765
+[0.732032   0.29068842]
+Weakened gaussian acc: 0.51279296875, Balanced weakened gaussian acc: 0.5197115384615385
+Beginning 2-point LIRA attack with 80 train pairs and 65 test pairs.
+[-0.88429922 -0.3784839 ]
+2-point acc: 0.5241379310344828, Balanced 2-point acc: 0.4879807692307692
+Beginning 3-point LIRA attack with 67 train pairs and 76 test pairs.
+[ 0.25527929 -0.04870716]
+Three point acc: 0.5839126479035741, Balanced three point acc: 0.586311861743912
+[ 0.54836382 -0.10016426]
+Weakened gaussian acc: 0.5163325771709634, Balanced weakened gaussian acc: 0.51259934095755
+Beginning 2-point LIRA attack with 67 train pairs and 76 test pairs.
+[ 0.2605039  -0.04276289]
+2-point acc: 0.5664335664335665, Balanced 2-point acc: 0.5788491751767478
+Beginning 3-point LIRA attack with 71 train pairs and 60 test pairs.
+[0.92955837 0.1954268 ]
+Three point acc: 0.4921875, Balanced three point acc: 0.5
+[0.73345535 0.2267451 ]
+Weakened gaussian acc: 0.4921875, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 71 train pairs and 60 test pairs.
+[0.82682758 0.25265304]
+2-point acc: 0.5419847328244275, Balanced 2-point acc: 0.5
+Beginning 3-point LIRA attack with 68 train pairs and 52 test pairs.
+[-0.83185174  0.37173924]
+Three point acc: 0.5547891332013575, Balanced three point acc: 0.5322398190045249
+[ 0.55822913 -0.13550143]
+Weakened gaussian acc: 0.53515625, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 68 train pairs and 52 test pairs.
+[-0.7511889   0.13307449]
+2-point acc: 0.55, Balanced 2-point acc: 0.5079185520361991
+Beginning 3-point LIRA attack with 63 train pairs and 72 test pairs.
+[0.84363621 0.29429552]
+Three point acc: 0.545197017609127, Balanced three point acc: 0.5525793650793651
+[0.50894471 0.0533355 ]
+Weakened gaussian acc: 0.5192444816468255, Balanced weakened gaussian acc: 0.5257936507936508
+Beginning 2-point LIRA attack with 63 train pairs and 72 test pairs.
+[0.58706876 0.11511406]
+2-point acc: 0.562962962962963, Balanced 2-point acc: 0.5396825396825397
+Beginning 3-point LIRA attack with 62 train pairs and 65 test pairs.
+[-1.21435266 -0.6889425 ]
+Three point acc: 0.5369097006823822, Balanced three point acc: 0.546650124069479
+[0.73264844 0.25233212]
+Weakened gaussian acc: 0.48516061181761794, Balanced weakened gaussian acc: 0.5033498759305212
+Beginning 2-point LIRA attack with 62 train pairs and 65 test pairs.
+[ 0.19712793 -0.00354712]
+2-point acc: 0.4881889763779528, Balanced 2-point acc: 0.47766749379652607
+Beginning 3-point LIRA attack with 50 train pairs and 74 test pairs.
+[0.93318753 0.12451647]
+Three point acc: 0.5484712837837837, Balanced three point acc: 0.49567567567567566
+[ 0.5136696  -0.35592398]
+Weakened gaussian acc: 0.5825337837837837, Balanced weakened gaussian acc: 0.5356756756756756
+Beginning 2-point LIRA attack with 50 train pairs and 74 test pairs.
+[0.76378598 0.02044943]
+2-point acc: 0.5887096774193549, Balanced 2-point acc: 0.5191891891891892
+Beginning 3-point LIRA attack with 78 train pairs and 53 test pairs.
+[-1.10212293  0.3479425 ]
+Three point acc: 0.6070717865566038, Balanced three point acc: 0.6092162554426706
+[0.56831302 0.16906735]
+Weakened gaussian acc: 0.533203125, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 78 train pairs and 53 test pairs.
+[0.6386622  0.19799839]
+2-point acc: 0.5954198473282443, Balanced 2-point acc: 0.5
+Beginning 3-point LIRA attack with 63 train pairs and 55 test pairs.
+[0.83652567 0.21641839]
+Three point acc: 0.51171875, Balanced three point acc: 0.5
+[0.57017784 0.04491437]
+Weakened gaussian acc: 0.51171875, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 63 train pairs and 55 test pairs.
+[0.65112454 0.10634643]
+2-point acc: 0.5338983050847458, Balanced 2-point acc: 0.5
+Beginning 3-point LIRA attack with 57 train pairs and 79 test pairs.
+[1.05085293 0.15728243]
+Three point acc: 0.537043012991339, Balanced three point acc: 0.5254274927825894
+[0.59446454 0.02668615]
+Weakened gaussian acc: 0.5436193579280479, Balanced weakened gaussian acc: 0.53175660670664
+Beginning 2-point LIRA attack with 57 train pairs and 79 test pairs.
+[0.874163   0.14709517]
+2-point acc: 0.5735294117647058, Balanced 2-point acc: 0.5254274927825894
+Beginning 3-point LIRA attack with 76 train pairs and 64 test pairs.
+[1.07512014 0.43912021]
+Three point acc: 0.5078125, Balanced three point acc: 0.5
+[0.63721399 0.19147655]
+Weakened gaussian acc: 0.5078125, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 76 train pairs and 64 test pairs.
+[0.92222404 0.39764617]
+2-point acc: 0.5428571428571428, Balanced 2-point acc: 0.5
+Beginning 3-point LIRA attack with 63 train pairs and 67 test pairs.
+[-0.81256831 -0.17730651]
+Three point acc: 0.5128338959962094, Balanced three point acc: 0.5297322909263208
+[0.7095708 0.2205394]
+Weakened gaussian acc: 0.4609375, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 63 train pairs and 67 test pairs.
+[-0.55516697 -0.16284944]
+2-point acc: 0.5692307692307692, Balanced 2-point acc: 0.5740345889599621
+Beginning 3-point LIRA attack with 72 train pairs and 61 test pairs.
+[1.05947356 0.61340207]
+Three point acc: 0.5331711065573771, Balanced three point acc: 0.5081967213114754
+[0.77855773 0.47211841]
+Weakened gaussian acc: 0.525390625, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 72 train pairs and 61 test pairs.
+[0.95961779 0.61220592]
+2-point acc: 0.5338345864661654, Balanced 2-point acc: 0.5619307832422586
+Beginning 3-point LIRA attack with 71 train pairs and 71 test pairs.
+[2.18016651 0.00258854]
+Three point acc: 0.53515625, Balanced three point acc: 0.5352112676056338
+[0.55657063 0.00444833]
+Weakened gaussian acc: 0.501953125, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 71 train pairs and 71 test pairs.
+[ 0.6668895  -0.03048958]
+2-point acc: 0.5492957746478874, Balanced 2-point acc: 0.5492957746478873
+Beginning 3-point LIRA attack with 53 train pairs and 77 test pairs.
+[0.77049818 0.13627914]
+Three point acc: 0.5337664252021563, Balanced three point acc: 0.509924038225925
+[0.75157568 0.32064441]
+Weakened gaussian acc: 0.5302497473045822, Balanced weakened gaussian acc: 0.5040431266846361
+Beginning 2-point LIRA attack with 53 train pairs and 77 test pairs.
+[0.57582985 0.08974867]
+2-point acc: 0.5769230769230769, Balanced 2-point acc: 0.5252389120313649
+Beginning 3-point LIRA attack with 58 train pairs and 72 test pairs.
+[0.96872909 0.35563326]
+Three point acc: 0.5234636913314176, Balanced three point acc: 0.5220306513409961
+[0.83606706 0.58846326]
+Weakened gaussian acc: 0.5199917724836907, Balanced weakened gaussian acc: 0.5186393289841567
+Beginning 2-point LIRA attack with 58 train pairs and 72 test pairs.
+[0.79987225 0.23500189]
+2-point acc: 0.5153846153846153, Balanced 2-point acc: 0.4870689655172414
+Beginning 3-point LIRA attack with 68 train pairs and 53 test pairs.
+[-0.91434754 -0.09695203]
+Three point acc: 0.5696296649556049, Balanced three point acc: 0.5732519422863485
+[0.54633743 0.10227099]
+Weakened gaussian acc: 0.494140625, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 68 train pairs and 53 test pairs.
+[-0.73841809  0.0110264 ]
+2-point acc: 0.6115702479338843, Balanced 2-point acc: 0.5794950055493896
+ 30%|██▉       | 38/128 [2:50:30<6:48:42, 272.47s/it] 30%|███       | 39/128 [2:54:55<6:40:42, 270.14s/it] 31%|███▏      | 40/128 [2:59:24<6:35:54, 269.94s/it] 32%|███▏      | 41/128 [3:03:59<6:33:28, 271.37s/it] 33%|███▎      | 42/128 [3:08:28<6:27:58, 270.68s/it] 34%|███▎      | 43/128 [3:13:21<6:32:56, 277.37s/it] 34%|███▍      | 44/128 [3:17:48<6:24:01, 274.30s/it] 35%|███▌      | 45/128 [3:22:16<6:16:43, 272.33s/it] 36%|███▌      | 46/128 [3:26:54<6:14:32, 274.06s/it] 37%|███▋      | 47/128 [3:31:27<6:09:30, 273.71s/it] 38%|███▊      | 48/128 [3:35:47<5:59:34, 269.69s/it] 38%|███▊      | 49/128 [3:40:14<5:53:50, 268.75s/it] 39%|███▉      | 50/128 [3:44:34<5:46:10, 266.29s/it] 40%|███▉      | 51/128 [3:49:06<5:43:50, 267.93s/it] 41%|████      | 52/128 [3:53:35<5:39:44, 268.22s/it] 41%|████▏     | 53/128 [3:58:10<5:37:50, 270.28s/it] 42%|████▏     | 54/128 [4:02:42<5:34:01, 270.83s/it] 43%|████▎     | 55/128 [4:07:17<5:30:57, 272.02s/it]Beginning 3-point LIRA attack with 59 train pairs and 69 test pairs.
+[0.71523119 0.28131608]
+Three point acc: 0.5309894873802505, Balanced three point acc: 0.5230901498403341
+[0.84884357 0.5659395 ]
+Weakened gaussian acc: 0.5345972684624697, Balanced weakened gaussian acc: 0.5276029055690072
+Beginning 2-point LIRA attack with 59 train pairs and 69 test pairs.
+[0.53562103 0.20802996]
+2-point acc: 0.578125, Balanced 2-point acc: 0.5509702775730778
+Beginning 3-point LIRA attack with 71 train pairs and 56 test pairs.
+[1.08689409 0.27602736]
+Three point acc: 0.47265625, Balanced three point acc: 0.5
+[0.58193779 0.0258419 ]
+Weakened gaussian acc: 0.47265625, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 71 train pairs and 56 test pairs.
+[0.88368557 0.20633214]
+2-point acc: 0.5590551181102362, Balanced 2-point acc: 0.5
+Beginning 3-point LIRA attack with 66 train pairs and 72 test pairs.
+[ 0.58293566 -0.47281276]
+Three point acc: 0.5233659840593434, Balanced three point acc: 0.5220959595959596
+[0.76223846 0.32646607]
+Weakened gaussian acc: 0.5146706321022727, Balanced weakened gaussian acc: 0.5132575757575758
+Beginning 2-point LIRA attack with 66 train pairs and 71 test pairs.
+[-0.45529056  0.37122404]
+2-point acc: 0.5401459854014599, Balanced 2-point acc: 0.5301963294921042
+Beginning 3-point LIRA attack with 52 train pairs and 56 test pairs.
+[1.02101329 0.37688779]
+Three point acc: 0.5130145733173077, Balanced three point acc: 0.5144230769230769
+[0.62054817 0.19753857]
+Weakened gaussian acc: 0.5308019617101648, Balanced weakened gaussian acc: 0.5322802197802198
+Beginning 2-point LIRA attack with 52 train pairs and 56 test pairs.
+[ 0.77935234 -0.06610492]
+2-point acc: 0.5462962962962963, Balanced 2-point acc: 0.5398351648351648
+Beginning 3-point LIRA attack with 70 train pairs and 62 test pairs.
+[1.0373052  0.44554792]
+Three point acc: 0.474609375, Balanced three point acc: 0.5
+[0.5477219  0.07803042]
+Weakened gaussian acc: 0.474609375, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 70 train pairs and 62 test pairs.
+[0.81157671 0.24916732]
+2-point acc: 0.5303030303030303, Balanced 2-point acc: 0.5
+Beginning 3-point LIRA attack with 47 train pairs and 79 test pairs.
+[0.71825802 0.21733512]
+Three point acc: 0.5827981921626717, Balanced three point acc: 0.5476703474279558
+[0.66390795 0.2203943 ]
+Weakened gaussian acc: 0.5861710544034473, Balanced weakened gaussian acc: 0.5453810934554268
+Beginning 2-point LIRA attack with 47 train pairs and 79 test pairs.
+[0.90454517 0.43576448]
+2-point acc: 0.6111111111111112, Balanced 2-point acc: 0.5218152437382171
+Beginning 3-point LIRA attack with 72 train pairs and 67 test pairs.
+[-0.80632867  0.45927179]
+Three point acc: 0.5538129664179104, Balanced three point acc: 0.5538971807628524
+[0.99542579 0.66138323]
+Weakened gaussian acc: 0.5141419368003732, Balanced weakened gaussian acc: 0.4953358208955224
+Beginning 2-point LIRA attack with 72 train pairs and 67 test pairs.
+[41.0708109  -1.04057991]
+2-point acc: 0.5611510791366906, Balanced 2-point acc: 0.5577321724709785
+Beginning 3-point LIRA attack with 65 train pairs and 64 test pairs.
+[0.93192498 0.40173862]
+Three point acc: 0.5221524752103366, Balanced three point acc: 0.5304086538461539
+[0.60250188 0.26040096]
+Weakened gaussian acc: 0.553887939453125, Balanced weakened gaussian acc: 0.5609375
+Beginning 2-point LIRA attack with 65 train pairs and 64 test pairs.
+[0.78239157 0.34729814]
+2-point acc: 0.5581395348837209, Balanced 2-point acc: 0.5612980769230769
+Beginning 3-point LIRA attack with 64 train pairs and 78 test pairs.
+[-0.97642357 -0.19858447]
+Three point acc: 0.505859375, Balanced three point acc: 0.5
+[0.65252452 0.18367662]
+Weakened gaussian acc: 0.47405301607572115, Balanced weakened gaussian acc: 0.4705528846153846
+Beginning 2-point LIRA attack with 64 train pairs and 78 test pairs.
+[-0.83713825 -0.16354036]
+2-point acc: 0.5492957746478874, Balanced 2-point acc: 0.5
+Beginning 3-point LIRA attack with 59 train pairs and 75 test pairs.
+[-1.43640484 -0.74178243]
+Three point acc: 0.5310522598870057, Balanced three point acc: 0.5270056497175141
+[1.03981743 0.68010185]
+Weakened gaussian acc: 0.5234375, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 59 train pairs and 75 test pairs.
+[-1.17356902 -0.73318514]
+2-point acc: 0.5373134328358209, Balanced 2-point acc: 0.5143502824858757
+Beginning 3-point LIRA attack with 75 train pairs and 53 test pairs.
+[1.06987304 0.28571636]
+Three point acc: 0.5, Balanced three point acc: 0.5
+[0.76112313 0.38253087]
+Weakened gaussian acc: 0.5094339622641509, Balanced weakened gaussian acc: 0.5094339622641509
+Beginning 2-point LIRA attack with 75 train pairs and 53 test pairs.
+[0.94549329 0.34332708]
+2-point acc: 0.5859375, Balanced 2-point acc: 0.5
+Beginning 3-point LIRA attack with 71 train pairs and 66 test pairs.
+[-0.94846953 -0.56327767]
+Three point acc: 0.569732314340589, Balanced three point acc: 0.5838668373879641
+[0.53495741 0.24653864]
+Weakened gaussian acc: 0.4756272007042254, Balanced weakened gaussian acc: 0.49295774647887325
+Beginning 2-point LIRA attack with 71 train pairs and 65 test pairs.
+[-0.74233345 -0.38410932]
+2-point acc: 0.6029411764705882, Balanced 2-point acc: 0.5852654387865656
+Beginning 3-point LIRA attack with 76 train pairs and 63 test pairs.
+[-0.89926402 -0.18813223]
+Three point acc: 0.5580332667606517, Balanced three point acc: 0.547827903091061
+[0.50059007 0.01234533]
+Weakened gaussian acc: 0.513671875, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 76 train pairs and 63 test pairs.
+[-0.74240375 -0.12582515]
+2-point acc: 0.5755395683453237, Balanced 2-point acc: 0.54124895572264
+Beginning 3-point LIRA attack with 53 train pairs and 57 test pairs.
+[ 0.59723441 -0.46637762]
+Three point acc: 0.5768397260840781, Balanced three point acc: 0.5716650115855677
+[0.54607101 0.10890975]
+Weakened gaussian acc: 0.48515857745779545, Balanced weakened gaussian acc: 0.4945382323733863
+Beginning 2-point LIRA attack with 53 train pairs and 57 test pairs.
+[ 0.16957588 -0.0601284 ]
+2-point acc: 0.4909090909090909, Balanced 2-point acc: 0.48096656736180077
+Beginning 3-point LIRA attack with 67 train pairs and 66 test pairs.
+[0.93430812 0.40016836]
+Three point acc: 0.5489535631501583, Balanced three point acc: 0.5443238353686115
+[0.54953069 0.18053108]
+Weakened gaussian acc: 0.5407104216135232, Balanced weakened gaussian acc: 0.5365219357756671
+Beginning 2-point LIRA attack with 67 train pairs and 66 test pairs.
+[0.78278012 0.30961402]
+2-point acc: 0.5413533834586466, Balanced 2-point acc: 0.5443238353686115
+Beginning 3-point LIRA attack with 59 train pairs and 68 test pairs.
+[0.98945064 0.35108702]
+Three point acc: 0.5192255265453639, Balanced three point acc: 0.5112163509471586
+[0.64208447 0.13730205]
+Weakened gaussian acc: 0.5372787886340977, Balanced weakened gaussian acc: 0.5304087736789631
+Beginning 2-point LIRA attack with 59 train pairs and 68 test pairs.
+[0.72797271 0.21412113]
+2-point acc: 0.5433070866141733, Balanced 2-point acc: 0.5208125623130608
+Beginning 3-point LIRA attack with 60 train pairs and 63 test pairs.
+[-0.49561591  0.16561745]
+Three point acc: 0.5078125, Balanced three point acc: 0.5
+[0.68915103 0.31043198]
+Weakened gaussian acc: 0.4844866071428572, Balanced weakened gaussian acc: 0.4785714285714286
+Beginning 2-point LIRA attack with 60 train pairs and 63 test pairs.
+[-0.1441912   0.09690327]
+2-point acc: 0.5365853658536586, Balanced 2-point acc: 0.5444444444444445
+Beginning 3-point LIRA attack with 55 train pairs and 64 test pairs.
+[-0.54563319 -0.17437537]
+Three point acc: 0.5306485262784091, Balanced three point acc: 0.5414772727272728
+[0.60179596 0.18531026]
+Weakened gaussian acc: 0.4798334295099432, Balanced weakened gaussian acc: 0.49076704545454547
+Beginning 2-point LIRA attack with 55 train pairs and 64 test pairs.
+[-0.86188932 -0.31701121]
+2-point acc: 0.5462184873949579, Balanced 2-point acc: 0.5103693181818182
+Beginning 3-point LIRA attack with 73 train pairs and 60 test pairs.
+[-0.50364956 -0.13226863]
+ 44%|████▍     | 56/128 [4:11:49<5:26:29, 272.07s/it] 45%|████▍     | 57/128 [4:16:28<5:24:23, 274.13s/it] 45%|████▌     | 58/128 [4:21:01<5:19:19, 273.70s/it] 46%|████▌     | 59/128 [4:25:24<5:11:14, 270.64s/it] 47%|████▋     | 60/128 [4:29:47<5:04:13, 268.44s/it] 48%|████▊     | 61/128 [4:34:19<5:00:39, 269.25s/it] 48%|████▊     | 62/128 [4:39:08<5:02:47, 275.27s/it] 49%|████▉     | 63/128 [4:43:40<4:57:09, 274.29s/it] 50%|█████     | 64/128 [4:48:04<4:49:17, 271.22s/it] 51%|█████     | 65/128 [4:52:31<4:43:28, 269.98s/it] 52%|█████▏    | 66/128 [4:57:11<4:42:10, 273.07s/it] 52%|█████▏    | 67/128 [5:01:34<4:34:27, 269.96s/it] 53%|█████▎    | 68/128 [5:06:03<4:29:47, 269.79s/it] 54%|█████▍    | 69/128 [5:10:28<4:23:39, 268.13s/it] 55%|█████▍    | 70/128 [5:15:00<4:20:17, 269.26s/it] 55%|█████▌    | 71/128 [5:19:33<4:16:51, 270.38s/it] 56%|█████▋    | 72/128 [5:24:04<4:12:37, 270.66s/it] 57%|█████▋    | 73/128 [5:28:36<4:08:25, 271.01s/it]Three point acc: 0.5103934788812785, Balanced three point acc: 0.5118721461187214
+[0.53867875 0.15341451]
+Weakened gaussian acc: 0.498046875, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 73 train pairs and 60 test pairs.
+[-0.464408   -0.11023337]
+2-point acc: 0.556390977443609, Balanced 2-point acc: 0.5216894977168949
+Beginning 3-point LIRA attack with 51 train pairs and 56 test pairs.
+[-0.7024415  -0.25274602]
+Three point acc: 0.5459285276610645, Balanced three point acc: 0.5537464985994398
+[ 0.44339556 -0.20045746]
+Weakened gaussian acc: 0.5006893382352942, Balanced weakened gaussian acc: 0.49264705882352944
+Beginning 2-point LIRA attack with 51 train pairs and 56 test pairs.
+[-0.41633703 -0.05694699]
+2-point acc: 0.5514018691588785, Balanced 2-point acc: 0.5609243697478992
+Beginning 3-point LIRA attack with 63 train pairs and 60 test pairs.
+[ 7.85945847 -0.39265591]
+Three point acc: 0.5484126984126985, Balanced three point acc: 0.5484126984126985
+[0.60030736 0.12905933]
+Weakened gaussian acc: 0.5, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 63 train pairs and 60 test pairs.
+[ 0.50934269 -0.251282  ]
+2-point acc: 0.5528455284552846, Balanced 2-point acc: 0.5476190476190477
+Beginning 3-point LIRA attack with 63 train pairs and 51 test pairs.
+[-0.66443607 -0.3260031 ]
+Three point acc: 0.49609375, Balanced three point acc: 0.5
+[0.56771177 0.20004237]
+Weakened gaussian acc: 0.49609375, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 63 train pairs and 51 test pairs.
+[-0.46354127 -0.18769403]
+2-point acc: 0.543859649122807, Balanced 2-point acc: 0.49206349206349204
+Beginning 3-point LIRA attack with 68 train pairs and 57 test pairs.
+[-1.07226756 -0.3690589 ]
+Three point acc: 0.5926182356166151, Balanced three point acc: 0.5699174406604748
+[1.78506294 0.41856732]
+Weakened gaussian acc: 0.466796875, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 68 train pairs and 57 test pairs.
+[-0.86048051 -0.26956472]
+2-point acc: 0.592, Balanced 2-point acc: 0.5625644994840042
+Beginning 3-point LIRA attack with 67 train pairs and 62 test pairs.
+[1.06069839 0.36865785]
+Three point acc: 0.5447168768054886, Balanced three point acc: 0.5417669715936446
+[0.7038787  0.18783317]
+Weakened gaussian acc: 0.5914856162734714, Balanced weakened gaussian acc: 0.5897929706307173
+Beginning 2-point LIRA attack with 67 train pairs and 62 test pairs.
+[0.88541651 0.28222473]
+2-point acc: 0.5271317829457365, Balanced 2-point acc: 0.5417669715936446
+Beginning 3-point LIRA attack with 53 train pairs and 84 test pairs.
+[0.92295767 0.56345064]
+Three point acc: 0.49985083951033243, Balanced three point acc: 0.48169362084456424
+[0.70771427 0.24020802]
+Weakened gaussian acc: 0.5026111859838275, Balanced weakened gaussian acc: 0.48517520215633425
+Beginning 2-point LIRA attack with 53 train pairs and 84 test pairs.
+[1.11496213 0.65566468]
+2-point acc: 0.5693430656934306, Balanced 2-point acc: 0.48169362084456424
+Beginning 3-point LIRA attack with 65 train pairs and 59 test pairs.
+[-1.14467973 -0.73056319]
+Three point acc: 0.5033501059322034, Balanced three point acc: 0.5155149934810952
+[0.85944433 0.62867447]
+Weakened gaussian acc: 0.4851231461864407, Balanced weakened gaussian acc: 0.5015645371577575
+Beginning 2-point LIRA attack with 65 train pairs and 59 test pairs.
+[-0.93983144 -0.63520217]
+2-point acc: 0.5403225806451613, Balanced 2-point acc: 0.5232073011734029
+Beginning 3-point LIRA attack with 71 train pairs and 59 test pairs.
+[-0.89867383 -0.14557962]
+Three point acc: 0.5539853261518262, Balanced three point acc: 0.52984005729291
+[0.6205677  0.11900009]
+Weakened gaussian acc: 0.53515625, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 71 train pairs and 59 test pairs.
+[-0.81168575 -0.11142596]
+2-point acc: 0.5615384615384614, Balanced 2-point acc: 0.52984005729291
+Beginning 3-point LIRA attack with 62 train pairs and 64 test pairs.
+[-1.02205753  0.20093517]
+Three point acc: 0.5482423843876008, Balanced three point acc: 0.5446068548387097
+[0.76541413 0.32648692]
+Weakened gaussian acc: 0.505859375, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 62 train pairs and 64 test pairs.
+[-0.89482491  0.60426669]
+2-point acc: 0.5317460317460317, Balanced 2-point acc: 0.5350302419354839
+Beginning 3-point LIRA attack with 57 train pairs and 64 test pairs.
+[1.14925601 0.61699727]
+Three point acc: 0.5247963353207237, Balanced three point acc: 0.5233004385964912
+[0.75010036 0.43048238]
+Weakened gaussian acc: 0.5117942408511513, Balanced weakened gaussian acc: 0.5105537280701754
+Beginning 2-point LIRA attack with 57 train pairs and 64 test pairs.
+[1.08558442 0.72751416]
+2-point acc: 0.5619834710743802, Balanced 2-point acc: 0.5418037280701754
+Beginning 3-point LIRA attack with 71 train pairs and 50 test pairs.
+[-0.7413548  0.1422512]
+Three point acc: 0.5394745818661972, Balanced three point acc: 0.5195774647887323
+[ 0.52282779 -0.45597396]
+Weakened gaussian acc: 0.529296875, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 71 train pairs and 50 test pairs.
+[-0.47846848  0.37601782]
+2-point acc: 0.6033057851239669, Balanced 2-point acc: 0.5554929577464789
+Beginning 3-point LIRA attack with 64 train pairs and 67 test pairs.
+[1.04088134 0.39609759]
+Three point acc: 0.5135078999533582, Balanced three point acc: 0.5255363805970149
+[0.74726875 0.39507875]
+Weakened gaussian acc: 0.5257003556436567, Balanced weakened gaussian acc: 0.535097947761194
+Beginning 2-point LIRA attack with 64 train pairs and 67 test pairs.
+[0.85848334 0.36330706]
+2-point acc: 0.549618320610687, Balanced 2-point acc: 0.5411613805970149
+Beginning 3-point LIRA attack with 70 train pairs and 49 test pairs.
+[-1.11031853 -0.48264421]
+Three point acc: 0.5599489795918368, Balanced three point acc: 0.5306122448979591
+[0.78319839 0.38535839]
+Weakened gaussian acc: 0.5627680759803921, Balanced weakened gaussian acc: 0.5196078431372548
+Beginning 2-point LIRA attack with 70 train pairs and 49 test pairs.
+[-0.94398085 -0.49067236]
+2-point acc: 0.6050420168067226, Balanced 2-point acc: 0.5571428571428572
+Beginning 3-point LIRA attack with 64 train pairs and 55 test pairs.
+[1.11832697 0.54487956]
+Three point acc: 0.4765625, Balanced three point acc: 0.5
+[0.73881387 0.39592292]
+Weakened gaussian acc: 0.5971615439967105, Balanced weakened gaussian acc: 0.5851151315789473
+Beginning 2-point LIRA attack with 64 train pairs and 55 test pairs.
+[0.95754451 0.48469948]
+2-point acc: 0.5378151260504201, Balanced 2-point acc: 0.5
+Beginning 3-point LIRA attack with 58 train pairs and 66 test pairs.
+[-0.9371435  -0.14573411]
+Three point acc: 0.51953125, Balanced three point acc: 0.5
+[0.57918731 0.12192496]
+Weakened gaussian acc: 0.468430342897581, Balanced weakened gaussian acc: 0.45470921255790014
+Beginning 2-point LIRA attack with 58 train pairs and 66 test pairs.
+[-0.74785088 -0.06250524]
+2-point acc: 0.532258064516129, Balanced 2-point acc: 0.5543364681295716
+Beginning 3-point LIRA attack with 70 train pairs and 70 test pairs.
+[1.03909791 0.2972017 ]
+Three point acc: 0.5234375, Balanced three point acc: 0.5285714285714286
+[0.59866816 0.08132035]
+Weakened gaussian acc: 0.5161830357142858, Balanced weakened gaussian acc: 0.5214285714285715
+Beginning 2-point LIRA attack with 70 train pairs and 70 test pairs.
+[0.94700151 0.37029187]
+2-point acc: 0.5142857142857142, Balanced 2-point acc: 0.5142857142857142
+Beginning 3-point LIRA attack with 61 train pairs and 59 test pairs.
+[ 3.04246339 -0.57436388]
+Three point acc: 0.5988121700472353, Balanced three point acc: 0.5959988885801613
+[-1.2775522   0.50112114]
+Weakened gaussian acc: 0.505859375, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 61 train pairs and 59 test pairs.
+[ 1.86198821 -0.64999796]
+2-point acc: 0.575, Balanced 2-point acc: 0.5702973048068908
+Beginning 3-point LIRA attack with 73 train pairs and 62 test pairs.
+[0.56986715 0.13916708]
+Three point acc: 0.5078125, Balanced three point acc: 0.5
+[0.5679145 0.0434346]
+Weakened gaussian acc: 0.5078125, Balanced weakened gaussian acc: 0.5
+ 58%|█████▊    | 74/128 [5:33:04<4:03:04, 270.08s/it] 59%|█████▊    | 75/128 [5:37:42<4:00:41, 272.48s/it] 59%|█████▉    | 76/128 [5:42:07<3:54:21, 270.42s/it] 60%|██████    | 77/128 [5:46:31<3:48:07, 268.38s/it] 61%|██████    | 78/128 [5:51:06<3:45:22, 270.45s/it] 62%|██████▏   | 79/128 [5:55:37<3:40:49, 270.40s/it] 62%|██████▎   | 80/128 [5:59:52<3:32:49, 266.03s/it] 63%|██████▎   | 81/128 [6:04:31<3:31:21, 269.83s/it] 64%|██████▍   | 82/128 [6:09:07<3:28:22, 271.80s/it] 65%|██████▍   | 83/128 [6:13:20<3:19:30, 266.00s/it] 66%|██████▌   | 84/128 [6:17:48<3:15:29, 266.58s/it] 66%|██████▋   | 85/128 [6:22:21<3:12:23, 268.45s/it] 67%|██████▋   | 86/128 [6:26:55<3:09:14, 270.36s/it] 68%|██████▊   | 87/128 [6:31:40<3:07:39, 274.63s/it] 69%|██████▉   | 88/128 [6:36:07<3:01:27, 272.19s/it] 70%|██████▉   | 89/128 [6:40:20<2:53:14, 266.52s/it] 70%|███████   | 90/128 [6:44:47<2:48:52, 266.65s/it] 71%|███████   | 91/128 [6:49:14<2:44:29, 266.75s/it]Beginning 2-point LIRA attack with 73 train pairs and 62 test pairs.
+[0.33681457 0.02758984]
+2-point acc: 0.5259259259259259, Balanced 2-point acc: 0.5154661953159523
+Beginning 3-point LIRA attack with 58 train pairs and 67 test pairs.
+[1.05746445 0.38577864]
+Three point acc: 0.5597396905558415, Balanced three point acc: 0.5609881626351003
+[0.56850861 0.10076038]
+Weakened gaussian acc: 0.5746067614513638, Balanced weakened gaussian acc: 0.5759135357694287
+Beginning 2-point LIRA attack with 58 train pairs and 67 test pairs.
+[0.8447588  0.27365232]
+2-point acc: 0.584, Balanced 2-point acc: 0.5609881626351003
+Beginning 3-point LIRA attack with 61 train pairs and 50 test pairs.
+[-0.74955263 -0.11174329]
+Three point acc: 0.5143404200819672, Balanced three point acc: 0.519016393442623
+[ 0.51402229 -0.01162891]
+Weakened gaussian acc: 0.494140625, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 61 train pairs and 50 test pairs.
+[-0.71253957 -0.15288445]
+2-point acc: 0.5405405405405406, Balanced 2-point acc: 0.5044262295081967
+Beginning 3-point LIRA attack with 76 train pairs and 71 test pairs.
+[-0.67728164 -0.20135314]
+Three point acc: 0.5946433121756857, Balanced three point acc: 0.58441438102298
+[0.79637655 0.40699154]
+Weakened gaussian acc: 0.5746820561527057, Balanced weakened gaussian acc: 0.5628243143068941
+Beginning 2-point LIRA attack with 76 train pairs and 69 test pairs.
+[-0.53111819  0.09802803]
+2-point acc: 0.5862068965517241, Balanced 2-point acc: 0.5799008390541571
+Beginning 3-point LIRA attack with 52 train pairs and 63 test pairs.
+[-5.45554354 -0.59602203]
+Three point acc: 0.48901754712301587, Balanced three point acc: 0.4952686202686203
+[1.69465846 0.43810475]
+Weakened gaussian acc: 0.517578125, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 52 train pairs and 63 test pairs.
+[-4.08935112 -0.60211708]
+2-point acc: 0.4782608695652174, Balanced 2-point acc: 0.4935897435897436
+Beginning 3-point LIRA attack with 54 train pairs and 64 test pairs.
+[ 0.53383723 -0.01824557]
+Three point acc: 0.5154351128472222, Balanced three point acc: 0.4930555555555556
+[0.79476841 0.33630856]
+Weakened gaussian acc: 0.5154351128472222, Balanced weakened gaussian acc: 0.4930555555555556
+Beginning 2-point LIRA attack with 54 train pairs and 64 test pairs.
+[0.78917938 0.13618911]
+2-point acc: 0.5677966101694916, Balanced 2-point acc: 0.5726273148148149
+Beginning 3-point LIRA attack with 76 train pairs and 53 test pairs.
+[-1.01739933 -0.54639133]
+Three point acc: 0.572309749720705, Balanced three point acc: 0.5331429990069514
+[0.55733021 0.17294735]
+Weakened gaussian acc: 0.548828125, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 76 train pairs and 53 test pairs.
+[-0.83712049 -0.39553448]
+2-point acc: 0.5968992248062015, Balanced 2-point acc: 0.5265640516385303
+Beginning 3-point LIRA attack with 50 train pairs and 56 test pairs.
+[-0.77536886 -0.06476034]
+Three point acc: 0.534375, Balanced three point acc: 0.5571428571428572
+[0.48626952 0.00928977]
+Weakened gaussian acc: 0.4749609375, Balanced weakened gaussian acc: 0.45285714285714285
+Beginning 2-point LIRA attack with 50 train pairs and 56 test pairs.
+[-0.63645861 -0.16107346]
+2-point acc: 0.5377358490566038, Balanced 2-point acc: 0.5571428571428572
+Beginning 3-point LIRA attack with 54 train pairs and 65 test pairs.
+[0.87268573 0.24985171]
+Three point acc: 0.5352764423076923, Balanced three point acc: 0.5017094017094017
+[0.56434111 0.16608394]
+Weakened gaussian acc: 0.5361624053030303, Balanced weakened gaussian acc: 0.5025252525252525
+Beginning 2-point LIRA attack with 54 train pairs and 65 test pairs.
+[0.7444133  0.16607575]
+2-point acc: 0.5378151260504201, Balanced 2-point acc: 0.5017094017094017
+Beginning 3-point LIRA attack with 71 train pairs and 51 test pairs.
+[0.88177042 0.08087073]
+Three point acc: 0.53125, Balanced three point acc: 0.5
+[ 0.50327395 -0.07922862]
+Weakened gaussian acc: 0.53125, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 71 train pairs and 51 test pairs.
+[0.71522715 0.03991004]
+2-point acc: 0.5819672131147541, Balanced 2-point acc: 0.5
+Beginning 3-point LIRA attack with 56 train pairs and 61 test pairs.
+[0.91919695 0.23001934]
+Three point acc: 0.5183328454332553, Balanced three point acc: 0.5304449648711944
+[0.52384226 0.08683871]
+Weakened gaussian acc: 0.5367480240046839, Balanced weakened gaussian acc: 0.5483021077283372
+Beginning 2-point LIRA attack with 56 train pairs and 61 test pairs.
+[0.75509667 0.15357865]
+2-point acc: 0.5470085470085471, Balanced 2-point acc: 0.5304449648711944
+Beginning 3-point LIRA attack with 68 train pairs and 68 test pairs.
+[-0.57367489  0.04554556]
+Three point acc: 0.5143037683823529, Balanced three point acc: 0.5220588235294117
+[0.73509439 0.23364049]
+Weakened gaussian acc: 0.5060891544117647, Balanced weakened gaussian acc: 0.5147058823529411
+Beginning 2-point LIRA attack with 68 train pairs and 68 test pairs.
+[-0.3085788  -0.07818707]
+2-point acc: 0.5220588235294118, Balanced 2-point acc: 0.5220588235294118
+Beginning 3-point LIRA attack with 55 train pairs and 71 test pairs.
+[-1.3708539  -0.39772825]
+Three point acc: 0.5466229193341869, Balanced three point acc: 0.548527528809219
+[0.63319498 0.17419438]
+Weakened gaussian acc: 0.5281395046414852, Balanced weakened gaussian acc: 0.5184379001280409
+Beginning 2-point LIRA attack with 55 train pairs and 71 test pairs.
+[-0.64738337 -0.20109905]
+2-point acc: 0.5714285714285714, Balanced 2-point acc: 0.5623559539052497
+Beginning 3-point LIRA attack with 59 train pairs and 75 test pairs.
+[0.52148723 0.27757169]
+Three point acc: 0.512518979519774, Balanced three point acc: 0.5029378531073446
+[0.7689013  0.39968181]
+Weakened gaussian acc: 0.5179740466101694, Balanced weakened gaussian acc: 0.5077966101694915
+Beginning 2-point LIRA attack with 59 train pairs and 75 test pairs.
+[-0.86679582 -0.44074589]
+2-point acc: 0.5597014925373134, Balanced 2-point acc: 0.5090395480225989
+Beginning 3-point LIRA attack with 68 train pairs and 63 test pairs.
+[0.44112224 0.04150353]
+Three point acc: 0.5312308517156863, Balanced three point acc: 0.5213585434173669
+[1.12948809 0.51493761]
+Weakened gaussian acc: 0.5607447406045751, Balanced weakened gaussian acc: 0.5531045751633987
+Beginning 2-point LIRA attack with 68 train pairs and 63 test pairs.
+[ 0.15523949 -0.10480434]
+2-point acc: 0.5877862595419847, Balanced 2-point acc: 0.5795985060690942
+Beginning 3-point LIRA attack with 81 train pairs and 52 test pairs.
+[0.59698978 0.15996386]
+Three point acc: 0.529296875, Balanced three point acc: 0.5
+[0.84562828 0.30152646]
+Weakened gaussian acc: 0.5315634645061729, Balanced weakened gaussian acc: 0.5246913580246914
+Beginning 2-point LIRA attack with 81 train pairs and 52 test pairs.
+[0.55068579 0.12759285]
+2-point acc: 0.6090225563909775, Balanced 2-point acc: 0.5
+Beginning 3-point LIRA attack with 75 train pairs and 73 test pairs.
+[0.93456336 0.42977156]
+Three point acc: 0.519708904109589, Balanced three point acc: 0.5326027397260273
+[0.53003121 0.1368476 ]
+Weakened gaussian acc: 0.5064383561643836, Balanced weakened gaussian acc: 0.5189041095890411
+Beginning 2-point LIRA attack with 75 train pairs and 73 test pairs.
+[0.65580579 0.19202223]
+2-point acc: 0.5202702702702703, Balanced 2-point acc: 0.5257534246575342
+Beginning 3-point LIRA attack with 61 train pairs and 62 test pairs.
+[-0.79868256  0.50953632]
+Three point acc: 0.486328125, Balanced three point acc: 0.5
+[0.58487986 0.22342967]
+Weakened gaussian acc: 0.5280548692821259, Balanced weakened gaussian acc: 0.5170544685351666
+Beginning 2-point LIRA attack with 61 train pairs and 62 test pairs.
+[-0.62005221 -0.42920339]
+2-point acc: 0.5528455284552846, Balanced 2-point acc: 0.5553939714436806
+Beginning 3-point LIRA attack with 65 train pairs and 66 test pairs.
+[0.81777979 0.19059408]
+Three point acc: 0.49743498688811183, Balanced three point acc: 0.5083916083916084
+[0.51519514 0.06326957]
+Weakened gaussian acc: 0.5053376311188811, Balanced weakened gaussian acc: 0.5160839160839161
+Beginning 2-point LIRA attack with 65 train pairs and 66 test pairs.
+[0.59303665 0.10712652]
+ 72%|███████▏  | 92/128 [6:53:42<2:40:21, 267.26s/it] 73%|███████▎  | 93/128 [6:58:12<2:36:17, 267.93s/it] 73%|███████▎  | 94/128 [7:02:45<2:32:44, 269.56s/it] 74%|███████▍  | 95/128 [7:07:24<2:29:44, 272.26s/it] 75%|███████▌  | 96/128 [7:11:55<2:25:02, 271.95s/it] 76%|███████▌  | 97/128 [7:16:26<2:20:21, 271.67s/it] 77%|███████▋  | 98/128 [7:20:58<2:15:53, 271.80s/it] 77%|███████▋  | 99/128 [7:25:40<2:12:51, 274.87s/it] 78%|███████▊  | 100/128 [7:30:05<2:06:53, 271.89s/it] 79%|███████▉  | 101/128 [7:34:49<2:03:55, 275.40s/it] 80%|███████▉  | 102/128 [7:39:01<1:56:22, 268.55s/it] 80%|████████  | 103/128 [7:43:30<1:51:59, 268.79s/it] 81%|████████▏ | 104/128 [7:48:01<1:47:45, 269.39s/it] 82%|████████▏ | 105/128 [7:52:20<1:42:02, 266.18s/it] 83%|████████▎ | 106/128 [7:56:48<1:37:45, 266.59s/it] 84%|████████▎ | 107/128 [8:01:19<1:33:50, 268.12s/it] 84%|████████▍ | 108/128 [8:05:54<1:30:03, 270.17s/it] 85%|████████▌ | 109/128 [8:10:29<1:26:00, 271.62s/it] 86%|████████▌ | 110/128 [8:15:04<1:21:45, 272.55s/it]2-point acc: 0.5114503816793893, Balanced 2-point acc: 0.5083916083916084
+Beginning 3-point LIRA attack with 71 train pairs and 72 test pairs.
+[-0.39604265 -0.02347688]
+Three point acc: 0.545741790150626, Balanced three point acc: 0.5368740219092332
+[0.64149577 0.22945088]
+Weakened gaussian acc: 0.5159428794992175, Balanced weakened gaussian acc: 0.5007824726134585
+Beginning 2-point LIRA attack with 71 train pairs and 72 test pairs.
+[0.3881367  0.13851912]
+2-point acc: 0.5384615384615384, Balanced 2-point acc: 0.5406885758998434
+Beginning 3-point LIRA attack with 64 train pairs and 65 test pairs.
+[-1.09899527  0.36198599]
+Three point acc: 0.5, Balanced three point acc: 0.5
+[ 0.6003531  -0.53434091]
+Weakened gaussian acc: 0.5, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 64 train pairs and 65 test pairs.
+[-0.8360012   0.33944911]
+2-point acc: 0.5038759689922481, Balanced 2-point acc: 0.5
+Beginning 3-point LIRA attack with 62 train pairs and 73 test pairs.
+[-0.95151551 -0.27500844]
+Three point acc: 0.513671875, Balanced three point acc: 0.5
+[0.59963701 0.20576914]
+Weakened gaussian acc: 0.5076726828325232, Balanced weakened gaussian acc: 0.49845338046840476
+Beginning 2-point LIRA attack with 62 train pairs and 73 test pairs.
+[-0.68237467 -0.11130128]
+2-point acc: 0.5407407407407407, Balanced 2-point acc: 0.5
+Beginning 3-point LIRA attack with 52 train pairs and 58 test pairs.
+[1.07102734 0.40027699]
+Three point acc: 0.5547807526525199, Balanced three point acc: 0.5570291777188329
+[-1.9510043   0.54678997]
+Weakened gaussian acc: 0.5005931904840849, Balanced weakened gaussian acc: 0.501657824933687
+Beginning 2-point LIRA attack with 52 train pairs and 58 test pairs.
+[0.9232392  0.32156419]
+2-point acc: 0.5363636363636364, Balanced 2-point acc: 0.5205570291777188
+Beginning 3-point LIRA attack with 57 train pairs and 67 test pairs.
+[-0.19934176  0.18408335]
+Three point acc: 0.5680775808457711, Balanced three point acc: 0.572139303482587
+[1.6247384  0.64686724]
+Weakened gaussian acc: 0.521484375, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 57 train pairs and 67 test pairs.
+[ 6.95459061 -0.46592474]
+2-point acc: 0.5403225806451613, Balanced 2-point acc: 0.5
+Beginning 3-point LIRA attack with 68 train pairs and 64 test pairs.
+[-0.90664601  0.31430932]
+Three point acc: 0.5623025333180147, Balanced three point acc: 0.5579044117647058
+[-2.78838088  0.48245767]
+Weakened gaussian acc: 0.5354434742647058, Balanced weakened gaussian acc: 0.5294117647058824
+Beginning 2-point LIRA attack with 68 train pairs and 64 test pairs.
+[-0.43246994  0.28330618]
+2-point acc: 0.5454545454545454, Balanced 2-point acc: 0.5510110294117647
+Beginning 3-point LIRA attack with 54 train pairs and 67 test pairs.
+[-0.30468339 -0.0038681 ]
+Three point acc: 0.5876719916044776, Balanced three point acc: 0.5849917081260365
+[0.78340273 0.33441057]
+Weakened gaussian acc: 0.4788994480721393, Balanced weakened gaussian acc: 0.48659480375898284
+Beginning 2-point LIRA attack with 54 train pairs and 67 test pairs.
+[-0.72044244 -0.4504518 ]
+2-point acc: 0.5702479338842975, Balanced 2-point acc: 0.5436705362078497
+Beginning 3-point LIRA attack with 62 train pairs and 59 test pairs.
+[1.07220534 0.36992251]
+Three point acc: 0.5872712633269546, Balanced three point acc: 0.5624658283214872
+[0.5844445  0.06524353]
+Weakened gaussian acc: 0.5931957780891197, Balanced weakened gaussian acc: 0.5701202843083653
+Beginning 2-point LIRA attack with 62 train pairs and 59 test pairs.
+[0.88566747 0.25569981]
+2-point acc: 0.5454545454545454, Balanced 2-point acc: 0.5539912520503008
+Beginning 3-point LIRA attack with 63 train pairs and 77 test pairs.
+[ 0.43146668 -0.10965399]
+Three point acc: 0.5409395292207791, Balanced three point acc: 0.5389610389610389
+[0.84775395 0.49474531]
+Weakened gaussian acc: 0.5080041486291487, Balanced weakened gaussian acc: 0.505050505050505
+Beginning 2-point LIRA attack with 63 train pairs and 77 test pairs.
+[-0.86982114 -0.51033191]
+2-point acc: 0.5642857142857143, Balanced 2-point acc: 0.536075036075036
+Beginning 3-point LIRA attack with 76 train pairs and 51 test pairs.
+[-0.83231287 -0.05599086]
+Three point acc: 0.5745800478908669, Balanced three point acc: 0.5553405572755419
+[0.53328249 0.03838859]
+Weakened gaussian acc: 0.525390625, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 76 train pairs and 51 test pairs.
+[-0.72351921 -0.07045078]
+2-point acc: 0.6377952755905512, Balanced 2-point acc: 0.5651444788441693
+Beginning 3-point LIRA attack with 54 train pairs and 65 test pairs.
+[-0.82537318 -0.4788424 ]
+Three point acc: 0.48650841346153845, Balanced three point acc: 0.4846153846153846
+[0.74416002 0.49095324]
+Weakened gaussian acc: 0.5445996928418804, Balanced weakened gaussian acc: 0.546011396011396
+Beginning 2-point LIRA attack with 54 train pairs and 65 test pairs.
+[-1.03765649 -0.75002709]
+2-point acc: 0.5294117647058824, Balanced 2-point acc: 0.49401709401709404
+Beginning 3-point LIRA attack with 66 train pairs and 61 test pairs.
+[-0.64255079 -0.31001484]
+Three point acc: 0.5954382451564828, Balanced three point acc: 0.5897913561847988
+[ 0.56582381 -0.02168173]
+Weakened gaussian acc: 0.484375, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 66 train pairs and 61 test pairs.
+[-1.29997654 -0.65556235]
+2-point acc: 0.5748031496062992, Balanced 2-point acc: 0.5803527074018877
+Beginning 3-point LIRA attack with 76 train pairs and 51 test pairs.
+[-1.0341663   0.18729147]
+Three point acc: 0.5573133344620743, Balanced three point acc: 0.548374613003096
+[-1.08372886  0.66044143]
+Weakened gaussian acc: 0.517578125, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 76 train pairs and 49 test pairs.
+[-0.85725005  0.12239321]
+2-point acc: 0.6, Balanced 2-point acc: 0.5441729323308271
+Beginning 3-point LIRA attack with 66 train pairs and 62 test pairs.
+[ 0.61512349 -0.20605205]
+Three point acc: 0.5805076979472141, Balanced three point acc: 0.5632942326490714
+[1.20498972 0.60084864]
+Weakened gaussian acc: 0.5254765395894428, Balanced weakened gaussian acc: 0.5293255131964809
+Beginning 2-point LIRA attack with 66 train pairs and 62 test pairs.
+[ 0.77711961 -0.12723862]
+2-point acc: 0.5546875, Balanced 2-point acc: 0.5632942326490714
+Beginning 3-point LIRA attack with 51 train pairs and 55 test pairs.
+[ 0.8169808  -0.04029119]
+Three point acc: 0.5550843917112299, Balanced three point acc: 0.5721925133689839
+[0.87917775 0.63707831]
+Weakened gaussian acc: 0.5258515764260249, Balanced weakened gaussian acc: 0.5434937611408199
+Beginning 2-point LIRA attack with 51 train pairs and 55 test pairs.
+[ 0.60814103 -0.15645897]
+2-point acc: 0.6132075471698113, Balanced 2-point acc: 0.605169340463458
+Beginning 3-point LIRA attack with 61 train pairs and 58 test pairs.
+[-1.05161524 -0.35672777]
+Three point acc: 0.5359130997385528, Balanced three point acc: 0.5456472583380441
+[0.60186897 0.18395267]
+Weakened gaussian acc: 0.486328125, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 61 train pairs and 58 test pairs.
+[-0.84762283 -0.27002132]
+2-point acc: 0.5714285714285714, Balanced 2-point acc: 0.5620407009609949
+Beginning 3-point LIRA attack with 66 train pairs and 75 test pairs.
+[1.00694912 0.35273568]
+Three point acc: 0.5851799242424243, Balanced three point acc: 0.5878787878787879
+[0.55960684 0.13561261]
+Weakened gaussian acc: 0.5948555871212121, Balanced weakened gaussian acc: 0.5972727272727273
+Beginning 2-point LIRA attack with 66 train pairs and 75 test pairs.
+[0.78327008 0.19819363]
+2-point acc: 0.6028368794326241, Balanced 2-point acc: 0.5812121212121213
+Beginning 3-point LIRA attack with 61 train pairs and 58 test pairs.
+[3.05430673 0.80511607]
+Three point acc: 0.5612948920647258, Balanced three point acc: 0.5674109666478236
+[0.80120135 0.41857651]
+Weakened gaussian acc: 0.5345020800946862, Balanced weakened gaussian acc: 0.5462125494629734
+Beginning 2-point LIRA attack with 61 train pairs and 58 test pairs.
+[ 0.76700025 -0.5178086 ]
+2-point acc: 0.5126050420168067, Balanced 2-point acc: 0.5
+ 87%|████████▋ | 111/128 [8:19:33<1:16:53, 271.40s/it] 88%|████████▊ | 112/128 [8:23:58<1:11:52, 269.53s/it] 88%|████████▊ | 113/128 [8:28:32<1:07:42, 270.81s/it] 89%|████████▉ | 114/128 [8:32:56<1:02:44, 268.88s/it] 90%|████████▉ | 115/128 [8:37:23<58:08, 268.35s/it]   91%|█████████ | 116/128 [8:42:01<54:16, 271.35s/it] 91%|█████████▏| 117/128 [8:46:32<49:42, 271.11s/it] 92%|█████████▏| 118/128 [8:50:59<44:57, 269.75s/it] 93%|█████████▎| 119/128 [8:55:27<40:24, 269.44s/it] 94%|█████████▍| 120/128 [8:59:45<35:26, 265.82s/it] 95%|█████████▍| 121/128 [9:04:16<31:12, 267.44s/it] 95%|█████████▌| 122/128 [9:08:42<26:41, 266.94s/it] 96%|█████████▌| 123/128 [9:13:05<22:10, 266.03s/it] 97%|█████████▋| 124/128 [9:17:32<17:44, 266.02s/it] 98%|█████████▊| 125/128 [9:21:53<13:14, 264.71s/it] 98%|█████████▊| 126/128 [9:26:24<08:53, 266.66s/it] 99%|█████████▉| 127/128 [9:31:10<04:32, 272.32s/it]100%|██████████| 128/128 [9:35:42<00:00, 272.23s/it]100%|██████████| 128/128 [9:35:42<00:00, 269.86s/it]Beginning 3-point LIRA attack with 61 train pairs and 62 test pairs.
+[-1.0996057  -0.65383833]
+Three point acc: 0.5344879941168694, Balanced three point acc: 0.525251189846642
+[0.6904691  0.34284072]
+Weakened gaussian acc: 0.5026529566744731, Balanced weakened gaussian acc: 0.4941451990632319
+Beginning 2-point LIRA attack with 61 train pairs and 62 test pairs.
+[-1.01199533 -0.59775056]
+2-point acc: 0.5121951219512195, Balanced 2-point acc: 0.5091221575885775
+Beginning 3-point LIRA attack with 67 train pairs and 55 test pairs.
+[0.97765159 0.16631434]
+Three point acc: 0.51171875, Balanced three point acc: 0.5
+[1.62738166 0.58124209]
+Weakened gaussian acc: 0.5386960287846483, Balanced weakened gaussian acc: 0.5394456289978677
+Beginning 2-point LIRA attack with 67 train pairs and 55 test pairs.
+[3.54432856 0.68165991]
+2-point acc: 0.5081967213114754, Balanced 2-point acc: 0.518046132971506
+Beginning 3-point LIRA attack with 55 train pairs and 65 test pairs.
+[-0.94330841  0.06876123]
+Three point acc: 0.501953125, Balanced three point acc: 0.5
+[0.68082795 0.27140416]
+Weakened gaussian acc: 0.4558948863636364, Balanced weakened gaussian acc: 0.4545454545454546
+Beginning 2-point LIRA attack with 55 train pairs and 65 test pairs.
+[-0.81541959 -0.02799426]
+2-point acc: 0.5416666666666666, Balanced 2-point acc: 0.5
+Beginning 3-point LIRA attack with 71 train pairs and 56 test pairs.
+[-1.00689976 -0.38035221]
+Three point acc: 0.5695722184670523, Balanced three point acc: 0.5489185110663983
+[0.71536309 0.30470108]
+Weakened gaussian acc: 0.5499098104250503, Balanced weakened gaussian acc: 0.5254024144869215
+Beginning 2-point LIRA attack with 71 train pairs and 56 test pairs.
+[-0.73411207 -0.22257262]
+2-point acc: 0.5984251968503937, Balanced 2-point acc: 0.5578470824949698
+Beginning 3-point LIRA attack with 59 train pairs and 63 test pairs.
+[1.14477629 0.43976089]
+Three point acc: 0.5728026424199623, Balanced three point acc: 0.571563088512241
+[0.62675321 0.1580047 ]
+Weakened gaussian acc: 0.5812441148775894, Balanced weakened gaussian acc: 0.5800376647834274
+Beginning 2-point LIRA attack with 59 train pairs and 63 test pairs.
+[0.90346079 0.30207095]
+2-point acc: 0.5819672131147541, Balanced 2-point acc: 0.571563088512241
+Beginning 3-point LIRA attack with 65 train pairs and 81 test pairs.
+[0.88948518 0.20863714]
+Three point acc: 0.557380698005698, Balanced three point acc: 0.5474833808167142
+[0.81092679 0.48817856]
+Weakened gaussian acc: 0.5403044871794872, Balanced weakened gaussian acc: 0.5290598290598291
+Beginning 2-point LIRA attack with 65 train pairs and 81 test pairs.
+[0.61329619 0.09480975]
+2-point acc: 0.589041095890411, Balanced 2-point acc: 0.553656220322887
+Beginning 3-point LIRA attack with 54 train pairs and 67 test pairs.
+[ 0.82165214 -0.06019657]
+Three point acc: 0.5140718931384743, Balanced three point acc: 0.5125760088446656
+[ 0.54639957 -0.18887258]
+Weakened gaussian acc: 0.529574525122549, Balanced weakened gaussian acc: 0.5285947712418301
+Beginning 2-point LIRA attack with 54 train pairs and 67 test pairs.
+[0.73651905 0.05228165]
+2-point acc: 0.5454545454545454, Balanced 2-point acc: 0.5105030403537866
+Beginning 3-point LIRA attack with 71 train pairs and 60 test pairs.
+[-0.90327688  0.19563484]
+Three point acc: 0.4795430787852113, Balanced three point acc: 0.48345070422535213
+[0.60598492 0.04805556]
+Weakened gaussian acc: 0.494140625, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 71 train pairs and 60 test pairs.
+[-0.78036992  0.1380554 ]
+2-point acc: 0.5038167938931297, Balanced 2-point acc: 0.48157276995305165
+Beginning 3-point LIRA attack with 72 train pairs and 70 test pairs.
+[-1.11940931 -0.12410737]
+Three point acc: 0.5491691468253969, Balanced three point acc: 0.5311507936507937
+[0.72577131 0.30856548]
+Weakened gaussian acc: 0.5305679563492063, Balanced weakened gaussian acc: 0.5001984126984127
+Beginning 2-point LIRA attack with 72 train pairs and 70 test pairs.
+[ 1.13607043 -0.8560654 ]
+2-point acc: 0.5352112676056338, Balanced 2-point acc: 0.5327380952380952
+Beginning 3-point LIRA attack with 73 train pairs and 48 test pairs.
+[1.14361919 0.43175128]
+Three point acc: 0.54296875, Balanced three point acc: 0.5
+[0.6484322  0.08728886]
+Weakened gaussian acc: 0.54296875, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 73 train pairs and 48 test pairs.
+[0.89635538 0.26486758]
+2-point acc: 0.6033057851239669, Balanced 2-point acc: 0.5
+Beginning 3-point LIRA attack with 70 train pairs and 72 test pairs.
+[-1.04949947 -0.3196111 ]
+Three point acc: 0.501953125, Balanced three point acc: 0.5
+[ 0.53773716 -0.0138894 ]
+Weakened gaussian acc: 0.503386966765873, Balanced weakened gaussian acc: 0.501984126984127
+Beginning 2-point LIRA attack with 70 train pairs and 72 test pairs.
+[-0.90369918 -0.13432704]
+2-point acc: 0.5070422535211268, Balanced 2-point acc: 0.5
+Beginning 3-point LIRA attack with 64 train pairs and 63 test pairs.
+[1.01049649 0.27818033]
+Three point acc: 0.5173485165550595, Balanced three point acc: 0.5305059523809523
+[0.61813264 0.18544802]
+Weakened gaussian acc: 0.5096910264756944, Balanced weakened gaussian acc: 0.5225694444444444
+Beginning 2-point LIRA attack with 64 train pairs and 63 test pairs.
+[0.8827892  0.29097663]
+2-point acc: 0.5275590551181102, Balanced 2-point acc: 0.5305059523809523
+Beginning 3-point LIRA attack with 75 train pairs and 59 test pairs.
+[-6.27778857 -0.7527334 ]
+Three point acc: 0.525390625, Balanced three point acc: 0.5
+[1.51872504 0.42227393]
+Weakened gaussian acc: 0.4913020833333333, Balanced weakened gaussian acc: 0.4933333333333333
+Beginning 2-point LIRA attack with 75 train pairs and 59 test pairs.
+[-2.15922708 -0.66307571]
+2-point acc: 0.5597014925373134, Balanced 2-point acc: 0.5
+Beginning 3-point LIRA attack with 66 train pairs and 60 test pairs.
+[-1.00824441 -0.23043488]
+Three point acc: 0.545614346590909, Balanced three point acc: 0.5469696969696969
+[0.56555436 0.06507051]
+Weakened gaussian acc: 0.498046875, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 66 train pairs and 60 test pairs.
+[-0.83953676 -0.20790038]
+2-point acc: 0.5634920634920635, Balanced 2-point acc: 0.5469696969696969
+Beginning 3-point LIRA attack with 78 train pairs and 68 test pairs.
+[-0.65662299 -0.04217064]
+Three point acc: 0.5053261689291102, Balanced three point acc: 0.48944193061840124
+[-2.1361994   0.66057246]
+Weakened gaussian acc: 0.53125, Balanced weakened gaussian acc: 0.5
+Beginning 2-point LIRA attack with 78 train pairs and 68 test pairs.
+[-64.52327991  -0.47833815]
+2-point acc: 0.5616438356164384, Balanced 2-point acc: 0.5576923076923077
+Beginning 3-point LIRA attack with 59 train pairs and 58 test pairs.
+[0.97789744 0.19723795]
+Three point acc: 0.5373896159044418, Balanced three point acc: 0.5413500876680304
+[0.59797834 0.05895837]
+Weakened gaussian acc: 0.5387976694915254, Balanced weakened gaussian acc: 0.5423728813559322
+Beginning 2-point LIRA attack with 59 train pairs and 58 test pairs.
+[0.8012315  0.13328938]
+2-point acc: 0.5384615384615384, Balanced 2-point acc: 0.5413500876680304
+Beginning 3-point LIRA attack with 57 train pairs and 75 test pairs.
+[-3.30880224  0.78620486]
+Three point acc: 0.5465309758771929, Balanced three point acc: 0.5336842105263158
+[1.14869342 0.48414644]
+Weakened gaussian acc: 0.6360032894736842, Balanced weakened gaussian acc: 0.6357894736842105
+Beginning 2-point LIRA attack with 57 train pairs and 75 test pairs.
+[3.43341406 0.68248371]
+2-point acc: 0.6136363636363636, Balanced 2-point acc: 0.5989473684210527
+Beginning 3-point LIRA attack with 64 train pairs and 61 test pairs.
+[-1.29850398 -0.69739832]
+Three point acc: 0.5152767994364754, Balanced three point acc: 0.5011526639344263
+[0.65065233 0.26738233]
+Weakened gaussian acc: 0.4927798411885246, Balanced weakened gaussian acc: 0.5066598360655737
+Beginning 2-point LIRA attack with 64 train pairs and 61 test pairs.
+[-0.94133779 -0.44901814]
+2-point acc: 0.52, Balanced 2-point acc: 0.5231813524590164
+Average three point attack success rate: 0.5357429115812274, average weakened gaussian attack success rate: 0.5186300801456228, Average simplified two point success rate: 0.5538451454146294
+Three Point Accuracies: [0.513671875, 0.515625, 0.4929383116883117, 0.541032865699874, 0.6023088609383833, 0.525390625, 0.56793212890625, 0.6026541095890411, 0.5140345982142858, 0.5333782188146998, 0.5108072916666667, 0.490234375, 0.5377426609848485, 0.5986473880597014, 0.5286703085839599, 0.5124626837109614, 0.5516030025921659, 0.5498737839033019, 0.59375, 0.51953125, 0.4876953125, 0.5839126479035741, 0.4921875, 0.5547891332013575, 0.545197017609127, 0.5369097006823822, 0.5484712837837837, 0.6070717865566038, 0.51171875, 0.537043012991339, 0.5078125, 0.5128338959962094, 0.5331711065573771, 0.53515625, 0.5337664252021563, 0.5234636913314176, 0.5696296649556049, 0.5309894873802505, 0.47265625, 0.5233659840593434, 0.5130145733173077, 0.474609375, 0.5827981921626717, 0.5538129664179104, 0.5221524752103366, 0.505859375, 0.5310522598870057, 0.5, 0.569732314340589, 0.5580332667606517, 0.5768397260840781, 0.5489535631501583, 0.5192255265453639, 0.5078125, 0.5306485262784091, 0.5103934788812785, 0.5459285276610645, 0.5484126984126985, 0.49609375, 0.5926182356166151, 0.5447168768054886, 0.49985083951033243, 0.5033501059322034, 0.5539853261518262, 0.5482423843876008, 0.5247963353207237, 0.5394745818661972, 0.5135078999533582, 0.5599489795918368, 0.4765625, 0.51953125, 0.5234375, 0.5988121700472353, 0.5078125, 0.5597396905558415, 0.5143404200819672, 0.5946433121756857, 0.48901754712301587, 0.5154351128472222, 0.572309749720705, 0.534375, 0.5352764423076923, 0.53125, 0.5183328454332553, 0.5143037683823529, 0.5466229193341869, 0.512518979519774, 0.5312308517156863, 0.529296875, 0.519708904109589, 0.486328125, 0.49743498688811183, 0.545741790150626, 0.5, 0.513671875, 0.5547807526525199, 0.5680775808457711, 0.5623025333180147, 0.5876719916044776, 0.5872712633269546, 0.5409395292207791, 0.5745800478908669, 0.48650841346153845, 0.5954382451564828, 0.5573133344620743, 0.5805076979472141, 0.5550843917112299, 0.5359130997385528, 0.5851799242424243, 0.5612948920647258, 0.5344879941168694, 0.51171875, 0.501953125, 0.5695722184670523, 0.5728026424199623, 0.557380698005698, 0.5140718931384743, 0.4795430787852113, 0.5491691468253969, 0.54296875, 0.501953125, 0.5173485165550595, 0.525390625, 0.545614346590909, 0.5053261689291102, 0.5373896159044418, 0.5465309758771929, 0.5152767994364754]
+Weakened Gaussian Accuracies: [0.513671875, 0.515625, 0.504591112012987, 0.5169820893757882, 0.5022550920364612, 0.49282226562500003, 0.529296875, 0.513671875, 0.4948381696428571, 0.517578125, 0.496703673245614, 0.5494813012295082, 0.5108546401515152, 0.5241371268656716, 0.5518691748903508, 0.4921875, 0.501953125, 0.5021178047612028, 0.5078125, 0.5055399197722568, 0.51279296875, 0.5163325771709634, 0.4921875, 0.53515625, 0.5192444816468255, 0.48516061181761794, 0.5825337837837837, 0.533203125, 0.51171875, 0.5436193579280479, 0.5078125, 0.4609375, 0.525390625, 0.501953125, 0.5302497473045822, 0.5199917724836907, 0.494140625, 0.5345972684624697, 0.47265625, 0.5146706321022727, 0.5308019617101648, 0.474609375, 0.5861710544034473, 0.5141419368003732, 0.553887939453125, 0.47405301607572115, 0.5234375, 0.5094339622641509, 0.4756272007042254, 0.513671875, 0.48515857745779545, 0.5407104216135232, 0.5372787886340977, 0.4844866071428572, 0.4798334295099432, 0.498046875, 0.5006893382352942, 0.5, 0.49609375, 0.466796875, 0.5914856162734714, 0.5026111859838275, 0.4851231461864407, 0.53515625, 0.505859375, 0.5117942408511513, 0.529296875, 0.5257003556436567, 0.5627680759803921, 0.5971615439967105, 0.468430342897581, 0.5161830357142858, 0.505859375, 0.5078125, 0.5746067614513638, 0.494140625, 0.5746820561527057, 0.517578125, 0.5154351128472222, 0.548828125, 0.4749609375, 0.5361624053030303, 0.53125, 0.5367480240046839, 0.5060891544117647, 0.5281395046414852, 0.5179740466101694, 0.5607447406045751, 0.5315634645061729, 0.5064383561643836, 0.5280548692821259, 0.5053376311188811, 0.5159428794992175, 0.5, 0.5076726828325232, 0.5005931904840849, 0.521484375, 0.5354434742647058, 0.4788994480721393, 0.5931957780891197, 0.5080041486291487, 0.525390625, 0.5445996928418804, 0.484375, 0.517578125, 0.5254765395894428, 0.5258515764260249, 0.486328125, 0.5948555871212121, 0.5345020800946862, 0.5026529566744731, 0.5386960287846483, 0.4558948863636364, 0.5499098104250503, 0.5812441148775894, 0.5403044871794872, 0.529574525122549, 0.494140625, 0.5305679563492063, 0.54296875, 0.503386966765873, 0.5096910264756944, 0.4913020833333333, 0.498046875, 0.53125, 0.5387976694915254, 0.6360032894736842, 0.4927798411885246]
+Simple Two-point Accuracies: [0.5581395348837209, 0.5546875, 0.56, 0.5396825396825397, 0.5378151260504201, 0.5070422535211268, 0.5982142857142857, 0.6231884057971014, 0.5230769230769231, 0.5611510791366906, 0.5042735042735043, 0.5371900826446281, 0.5267175572519084, 0.5923076923076923, 0.504424778761062, 0.5357142857142856, 0.5303030303030303, 0.5384615384615384, 0.6015625, 0.5227272727272727, 0.5241379310344828, 0.5664335664335665, 0.5419847328244275, 0.55, 0.562962962962963, 0.4881889763779528, 0.5887096774193549, 0.5954198473282443, 0.5338983050847458, 0.5735294117647058, 0.5428571428571428, 0.5692307692307692, 0.5338345864661654, 0.5492957746478874, 0.5769230769230769, 0.5153846153846153, 0.6115702479338843, 0.578125, 0.5590551181102362, 0.5401459854014599, 0.5462962962962963, 0.5303030303030303, 0.6111111111111112, 0.5611510791366906, 0.5581395348837209, 0.5492957746478874, 0.5373134328358209, 0.5859375, 0.6029411764705882, 0.5755395683453237, 0.4909090909090909, 0.5413533834586466, 0.5433070866141733, 0.5365853658536586, 0.5462184873949579, 0.556390977443609, 0.5514018691588785, 0.5528455284552846, 0.543859649122807, 0.592, 0.5271317829457365, 0.5693430656934306, 0.5403225806451613, 0.5615384615384614, 0.5317460317460317, 0.5619834710743802, 0.6033057851239669, 0.549618320610687, 0.6050420168067226, 0.5378151260504201, 0.532258064516129, 0.5142857142857142, 0.575, 0.5259259259259259, 0.584, 0.5405405405405406, 0.5862068965517241, 0.4782608695652174, 0.5677966101694916, 0.5968992248062015, 0.5377358490566038, 0.5378151260504201, 0.5819672131147541, 0.5470085470085471, 0.5220588235294118, 0.5714285714285714, 0.5597014925373134, 0.5877862595419847, 0.6090225563909775, 0.5202702702702703, 0.5528455284552846, 0.5114503816793893, 0.5384615384615384, 0.5038759689922481, 0.5407407407407407, 0.5363636363636364, 0.5403225806451613, 0.5454545454545454, 0.5702479338842975, 0.5454545454545454, 0.5642857142857143, 0.6377952755905512, 0.5294117647058824, 0.5748031496062992, 0.6, 0.5546875, 0.6132075471698113, 0.5714285714285714, 0.6028368794326241, 0.5126050420168067, 0.5121951219512195, 0.5081967213114754, 0.5416666666666666, 0.5984251968503937, 0.5819672131147541, 0.589041095890411, 0.5454545454545454, 0.5038167938931297, 0.5352112676056338, 0.6033057851239669, 0.5070422535211268, 0.5275590551181102, 0.5597014925373134, 0.5634920634920635, 0.5616438356164384, 0.5384615384615384, 0.6136363636363636, 0.52]
+
+Balanced Three Point Accuracies: [0.5, 0.5, 0.5038961038961038, 0.5271122320302648, 0.6037309214245337, 0.5, 0.546875, 0.5972602739726027, 0.4928571428571429, 0.520600414078675, 0.5166666666666667, 0.5, 0.5236596736596737, 0.5972518360578062, 0.5100250626566416, 0.5171463563992651, 0.5504608294930875, 0.558372641509434, 0.5934065934065934, 0.5, 0.49519230769230765, 0.586311861743912, 0.5, 0.5322398190045249, 0.5525793650793651, 0.546650124069479, 0.49567567567567566, 0.6092162554426706, 0.5, 0.5254274927825894, 0.5, 0.5297322909263208, 0.5081967213114754, 0.5352112676056338, 0.509924038225925, 0.5220306513409961, 0.5732519422863485, 0.5230901498403341, 0.5, 0.5220959595959596, 0.5144230769230769, 0.5, 0.5476703474279558, 0.5538971807628524, 0.5304086538461539, 0.5, 0.5270056497175141, 0.5, 0.5838668373879641, 0.547827903091061, 0.5716650115855677, 0.5443238353686115, 0.5112163509471586, 0.5, 0.5414772727272728, 0.5118721461187214, 0.5537464985994398, 0.5484126984126985, 0.5, 0.5699174406604748, 0.5417669715936446, 0.48169362084456424, 0.5155149934810952, 0.52984005729291, 0.5446068548387097, 0.5233004385964912, 0.5195774647887323, 0.5255363805970149, 0.5306122448979591, 0.5, 0.5, 0.5285714285714286, 0.5959988885801613, 0.5, 0.5609881626351003, 0.519016393442623, 0.58441438102298, 0.4952686202686203, 0.4930555555555556, 0.5331429990069514, 0.5571428571428572, 0.5017094017094017, 0.5, 0.5304449648711944, 0.5220588235294117, 0.548527528809219, 0.5029378531073446, 0.5213585434173669, 0.5, 0.5326027397260273, 0.5, 0.5083916083916084, 0.5368740219092332, 0.5, 0.5, 0.5570291777188329, 0.572139303482587, 0.5579044117647058, 0.5849917081260365, 0.5624658283214872, 0.5389610389610389, 0.5553405572755419, 0.4846153846153846, 0.5897913561847988, 0.548374613003096, 0.5632942326490714, 0.5721925133689839, 0.5456472583380441, 0.5878787878787879, 0.5674109666478236, 0.525251189846642, 0.5, 0.5, 0.5489185110663983, 0.571563088512241, 0.5474833808167142, 0.5125760088446656, 0.48345070422535213, 0.5311507936507937, 0.5, 0.5, 0.5305059523809523, 0.5, 0.5469696969696969, 0.48944193061840124, 0.5413500876680304, 0.5336842105263158, 0.5011526639344263]
+Balanced Weakened Gaussian Accuracies: [0.5, 0.5, 0.5123376623376623, 0.5055485498108448, 0.5120124364047485, 0.5125, 0.5, 0.5, 0.47857142857142854, 0.5, 0.493859649122807, 0.5524590163934426, 0.5018648018648019, 0.5172944799810472, 0.5372807017543859, 0.5, 0.5, 0.47037146226415094, 0.5, 0.4930986887508627, 0.5197115384615385, 0.51259934095755, 0.5, 0.5, 0.5257936507936508, 0.5033498759305212, 0.5356756756756756, 0.5, 0.5, 0.53175660670664, 0.5, 0.5, 0.5, 0.5, 0.5040431266846361, 0.5186393289841567, 0.5, 0.5276029055690072, 0.5, 0.5132575757575758, 0.5322802197802198, 0.5, 0.5453810934554268, 0.4953358208955224, 0.5609375, 0.4705528846153846, 0.5, 0.5094339622641509, 0.49295774647887325, 0.5, 0.4945382323733863, 0.5365219357756671, 0.5304087736789631, 0.4785714285714286, 0.49076704545454547, 0.5, 0.49264705882352944, 0.5, 0.5, 0.5, 0.5897929706307173, 0.48517520215633425, 0.5015645371577575, 0.5, 0.5, 0.5105537280701754, 0.5, 0.535097947761194, 0.5196078431372548, 0.5851151315789473, 0.45470921255790014, 0.5214285714285715, 0.5, 0.5, 0.5759135357694287, 0.5, 0.5628243143068941, 0.5, 0.4930555555555556, 0.5, 0.45285714285714285, 0.5025252525252525, 0.5, 0.5483021077283372, 0.5147058823529411, 0.5184379001280409, 0.5077966101694915, 0.5531045751633987, 0.5246913580246914, 0.5189041095890411, 0.5170544685351666, 0.5160839160839161, 0.5007824726134585, 0.5, 0.49845338046840476, 0.501657824933687, 0.5, 0.5294117647058824, 0.48659480375898284, 0.5701202843083653, 0.505050505050505, 0.5, 0.546011396011396, 0.5, 0.5, 0.5293255131964809, 0.5434937611408199, 0.5, 0.5972727272727273, 0.5462125494629734, 0.4941451990632319, 0.5394456289978677, 0.4545454545454546, 0.5254024144869215, 0.5800376647834274, 0.5290598290598291, 0.5285947712418301, 0.5, 0.5001984126984127, 0.5, 0.501984126984127, 0.5225694444444444, 0.4933333333333333, 0.5, 0.5, 0.5423728813559322, 0.6357894736842105, 0.5066598360655737]
+Balanced Simple Two-point Accuracies: [0.5, 0.5, 0.538961038961039, 0.5271122320302648, 0.5305257207461843, 0.5, 0.546875, 0.6126448893572181, 0.4880952380952381, 0.5626293995859213, 0.5026315789473684, 0.5360655737704918, 0.5237762237762238, 0.5878938640132669, 0.5012531328320802, 0.5308226168605837, 0.5, 0.5002948113207547, 0.6006105006105007, 0.5, 0.4879807692307692, 0.5788491751767478, 0.5, 0.5079185520361991, 0.5396825396825397, 0.47766749379652607, 0.5191891891891892, 0.5, 0.5, 0.5254274927825894, 0.5, 0.5740345889599621, 0.5619307832422586, 0.5492957746478873, 0.5252389120313649, 0.4870689655172414, 0.5794950055493896, 0.5509702775730778, 0.5, 0.5301963294921042, 0.5398351648351648, 0.5, 0.5218152437382171, 0.5577321724709785, 0.5612980769230769, 0.5, 0.5143502824858757, 0.5, 0.5852654387865656, 0.54124895572264, 0.48096656736180077, 0.5443238353686115, 0.5208125623130608, 0.5444444444444445, 0.5103693181818182, 0.5216894977168949, 0.5609243697478992, 0.5476190476190477, 0.49206349206349204, 0.5625644994840042, 0.5417669715936446, 0.48169362084456424, 0.5232073011734029, 0.52984005729291, 0.5350302419354839, 0.5418037280701754, 0.5554929577464789, 0.5411613805970149, 0.5571428571428572, 0.5, 0.5543364681295716, 0.5142857142857142, 0.5702973048068908, 0.5154661953159523, 0.5609881626351003, 0.5044262295081967, 0.5799008390541571, 0.4935897435897436, 0.5726273148148149, 0.5265640516385303, 0.5571428571428572, 0.5017094017094017, 0.5, 0.5304449648711944, 0.5220588235294118, 0.5623559539052497, 0.5090395480225989, 0.5795985060690942, 0.5, 0.5257534246575342, 0.5553939714436806, 0.5083916083916084, 0.5406885758998434, 0.5, 0.5, 0.5205570291777188, 0.5, 0.5510110294117647, 0.5436705362078497, 0.5539912520503008, 0.536075036075036, 0.5651444788441693, 0.49401709401709404, 0.5803527074018877, 0.5441729323308271, 0.5632942326490714, 0.605169340463458, 0.5620407009609949, 0.5812121212121213, 0.5, 0.5091221575885775, 0.518046132971506, 0.5, 0.5578470824949698, 0.571563088512241, 0.553656220322887, 0.5105030403537866, 0.48157276995305165, 0.5327380952380952, 0.5, 0.5, 0.5305059523809523, 0.5, 0.5469696969696969, 0.5576923076923077, 0.5413500876680304, 0.5989473684210527, 0.5231813524590164]

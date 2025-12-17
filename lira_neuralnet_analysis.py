@@ -327,7 +327,7 @@ if __name__ == "__main__":
         # print(ans[0][0].shape, ans[0][1].shape)
         # print(f"Attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
 
-        print("Three point acc: " + str(alt_accs[-1]) + ", Balanced three point acc: " + str(balanced_alt_accs[-1]))
+        print("Three point acc: " + str(accs[-1]) + ", Balanced three point acc: " + str(balanced_accs[-1]))
 
         """
         atk = gaussian_lira_attack(train_confidences, test_confidences)
