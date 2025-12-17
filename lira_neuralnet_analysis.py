@@ -122,10 +122,10 @@ def gaussian_lira_attack(train_advantages, test_advantages, train_test_set=None)
         test_pointer = 0
         i = 0
         while True:
-            if i in train_test_set[0] and i in train_test_set[1]:
+            if i in train_test_set[0] and i in train_test_set[1] and i in train_test_set[2]:
                 new_train_advantages.append(train_advantages[train_pointer])
                 train_pointer += 1
-            elif i not in train_test_set[0] and i not in train_test_set[1]:
+            elif i not in train_test_set[0] and i not in train_test_set[1] and i not in train_test_set[2]:
                 new_test_advantages.append(test_advantages[test_pointer])
                 test_pointer += 1
             elif i in train_test_set[0]:
@@ -168,22 +168,47 @@ def plot_bilira_categorization(train, test):
     plt.scatter(test[:,0], test[:,1], color='orange', label='Test Pairs (out of dataset)')
     plt.show()
 
-def approximate_bilira_attack(train_advantages1, test_advantages1, train_set1, train_advantages2, test_advantages2, train_set2, plot=False):
+def approximate_bilira_attack(train_advantages1, test_advantages1, train_set1, train_advantages2, test_advantages2, train_set2, train_set3, plot=False):
     """
     Uses a hasty approximation that assumes the dividing line between in and out points runs orthogonally through the line between the average in point's confidence and the average out point's confidence. It is trivial to come up with examples where this is not true, but those examples may not be common or strong in practice, so hopefully this is a reasonable approximation.
     """
     train_advantages = []
     test_advantages = []
     for i in range(max((max(train_set1)+1), (max(train_set2)+1))):
-        if i in train_set1 and i in train_set2:
+        if i in train_set1 and i in train_set2 and i in train_set3:
             train_advantages.append((train_advantages1[train_set1.index(i)], train_advantages2[train_set2.index(i)]))
-        elif i not in train_set1 and i not in train_set2:
+        elif i not in train_set1 and i not in train_set2 and i not in train_set3:
             test_advantages.append((test_advantages1[i - bisect_left(train_set1, i)], test_advantages2[i - bisect_left(train_set2, i)]))
 
     if plot:
         plot_bilira_categorization(np.array(train_advantages), np.array(test_advantages))
 
     print("Beginning 2-point LIRA attack with " + str(len(train_advantages)) + " train pairs and " + str(len(test_advantages)) + " test pairs.")
+
+    train_avg = np.mean(train_advantages, axis=0)
+    test_avg = np.mean(test_advantages, axis=0)
+    diff = train_avg-test_avg
+    unit_diff = diff / np.linalg.norm(diff)
+    train_advantages = np.dot(train_advantages, unit_diff)
+    test_advantages = np.dot(test_advantages, unit_diff)
+
+    # print(sorted_train_advantages)
+    # print(sorted_train_advantages.shape)
+    return gaussian_lira_attack(train_advantages, test_advantages)
+
+def approximate_trilira_attack(train_advantages1, test_advantages1, train_set1, train_advantages2, test_advantages2, train_set2, train_advantages3, test_advantages3, train_set3):
+    """
+    Uses a hasty approximation that assumes the dividing line between in and out points runs orthogonally through the line between the average in point's confidence and the average out point's confidence. It is trivial to come up with examples where this is not true, but those examples may not be common or strong in practice, so hopefully this is a reasonable approximation.
+    """
+    train_advantages = []
+    test_advantages = []
+    for i in range(max(((max(train_set1)+1), (max(train_set2)+1), (max(train_set3)+1)))):
+        if i in train_set1 and i in train_set2 and i in train_set3:
+            train_advantages.append((train_advantages1[train_set1.index(i)], train_advantages2[train_set2.index(i)], train_advantages3[train_set3.index(i)]))
+        elif i not in train_set1 and i not in train_set2 and i not in train_set3:
+            test_advantages.append((test_advantages1[i - bisect_left(train_set1, i)], test_advantages2[i - bisect_left(train_set2, i)], test_advantages3[i - bisect_left(train_set3, i)]))
+
+    print("Beginning 3-point LIRA attack with " + str(len(train_advantages)) + " train pairs and " + str(len(test_advantages)) + " test pairs.")
 
     train_avg = np.mean(train_advantages, axis=0)
     test_avg = np.mean(test_advantages, axis=0)
@@ -261,9 +286,9 @@ if __name__ == "__main__":
     balanced_weakened_accs = []
     balanced_two_point_accs = []
     
-    ans = generate_results(num_models=256, model_start=0, private=False)
+    ans = generate_results(num_models=512, model_start=0, private=False)
     print("Data generated...")
-    for sample in tqdm(range(104, 106)):
+    for sample in tqdm(range(128)):
         train_idxs = [i for i in range(len(ans)) if sample in ans[i][2]]
         test_idxs = [i for i in range(len(ans)) if sample not in ans[i][2]]
         if len(train_idxs) < 1 or len(test_idxs) < 1:
@@ -279,13 +304,20 @@ if __name__ == "__main__":
         train_confidences2 = np.array([ans[i][0][list(ans[i][2]).index(sample+10000)] for i in train_idxs2])
         test_confidences2 = np.array([ans[i][1][[j for j in range(50000) if j not in ans[i][2]].index(sample+10000)] for i in test_idxs2])
 
+        train_idxs3 = [i for i in range(len(ans)) if sample+20000 in ans[i][2]]
+        test_idxs3 = [i for i in range(len(ans)) if sample+20000 not in ans[i][2]]
+        if len(train_idxs3) < 1 or len(test_idxs3) < 1:
+            continue
+        train_confidences3 = np.array([ans[i][0][list(ans[i][2]).index(sample+20000)] for i in train_idxs3])
+        test_confidences3 = np.array([ans[i][1][[j for j in range(50000) if j not in ans[i][2]].index(sample+20000)] for i in test_idxs3])
+
         train_count += len(train_idxs)
         test_count += len(test_idxs)
         train_data.extend(train_confidences)
         test_data.extend(test_confidences)
 
-        """
-        atk = brute_force_lira_attack(train_confidences, test_confidences)
+        
+        atk = approximate_trilira_attack(train_confidences, test_confidences, train_idxs, train_confidences2, test_confidences2, train_idxs2, train_confidences3, test_confidences3, train_idxs3)
         train_acc = np.mean(atk[0])
         test_acc = 1.0-np.mean(atk[1])
         atk_success_rate = ((len(train_idxs)*train_acc) + (len(test_idxs)*test_acc)) / (len(train_idxs) + len(test_idxs))
@@ -295,6 +327,9 @@ if __name__ == "__main__":
         # print(ans[0][0].shape, ans[0][1].shape)
         # print(f"Attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
 
+        print("Three point acc: " + str(alt_accs[-1]) + ", Balanced three point acc: " + str(balanced_alt_accs[-1]))
+
+        """
         atk = gaussian_lira_attack(train_confidences, test_confidences)
         train_acc = np.mean(atk[0])
         test_acc = 1.0-np.mean(atk[1])
@@ -306,8 +341,9 @@ if __name__ == "__main__":
         # print(f"Attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
 
         print("Gaussian acc: " + str(alt_accs[-1]) + ", Balanced gaussian acc: " + str(balanced_alt_accs[-1]))
+        """
 
-        atk = gaussian_lira_attack(train_confidences, test_confidences, (train_idxs, train_idxs2))
+        atk = gaussian_lira_attack(train_confidences, test_confidences, (train_idxs, train_idxs2, train_idxs3))
         train_acc = np.mean(atk[0])
         test_acc = 1.0-np.mean(atk[1])
         atk_success_rate = ((len(train_idxs)*train_acc) + (len(test_idxs)*test_acc)) / (len(train_idxs) + len(test_idxs))
@@ -318,9 +354,9 @@ if __name__ == "__main__":
         # print(f"Attack success rate: {atk_success_rate*100:.2f}% (Train acc: {train_acc*100:.2f}%, Test acc: {test_acc*100:.2f}%)")
 
         print("Weakened gaussian acc: " + str(weakened_accs[-1]) + ", Balanced weakened gaussian acc: " + str(balanced_weakened_accs[-1]))
-        """
+        
 
-        atk = approximate_bilira_attack(train_confidences, test_confidences, train_idxs, train_confidences2, test_confidences2, train_idxs2, plot=True)
+        atk = approximate_bilira_attack(train_confidences, test_confidences, train_idxs, train_confidences2, test_confidences2, train_idxs2, train_idxs3, plot=False)
         train_acc = np.mean(atk[0])
         test_acc = 1.0-np.mean(atk[1])
         atk_success_rate = (train_acc*len(atk[0])+test_acc*len(atk[1]))/(len(atk[0])+len(atk[1]))
@@ -332,13 +368,13 @@ if __name__ == "__main__":
 
         print("2-point acc: " + str(two_point_accs[-1]) + ", Balanced 2-point acc: " + str(balanced_two_point_accs[-1]))
 
-    print(f"Average attack success rate: {sum(accs)/len(accs)}, average gaussian attack success rate: {sum(alt_accs)/len(alt_accs)}, average weakened gaussian attack success rate: {sum(weakened_accs)/len(weakened_accs)}, Average simplified two point success rate: {sum(two_point_accs)/len(two_point_accs)}")
-    print("Brute Force Accuracies: " + str(accs))
-    print("Gaussian Accuracies: " + str(alt_accs))
+    print(f"Average three point attack success rate: {sum(accs)/len(accs)}, average weakened gaussian attack success rate: {sum(weakened_accs)/len(weakened_accs)}, Average simplified two point success rate: {sum(two_point_accs)/len(two_point_accs)}")
+    print("Three Point Accuracies: " + str(accs))
+    # print("Gaussian Accuracies: " + str(alt_accs))
     print("Weakened Gaussian Accuracies: " + str(weakened_accs))
     print("Simple Two-point Accuracies: " + str(two_point_accs))
 
-    print("Balanced Brute Force Accuracies: " + str(balanced_accs))
-    print("Balanced Gaussian Accuracies: " + str(balanced_alt_accs))
+    print("Balanced Three Point Accuracies: " + str(balanced_accs))
+    # print("Balanced Gaussian Accuracies: " + str(balanced_alt_accs))
     print("Balanced Weakened Gaussian Accuracies: " + str(balanced_weakened_accs))
     print("Balanced Simple Two-point Accuracies: " + str(balanced_two_point_accs))
